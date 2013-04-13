@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e -x
-BASE=/mnt/external/init
+BASE=/mnt/external3/init
 
 cd $BASE
 
-source $BASE/install.sh
-source $BASE/start.sh
-
+source $BASE/init.sh.*.sh
