@@ -6,6 +6,7 @@ yum install -y wget
 yum install -y byobu
 yum install -y which
 yum install -y nano
+yum install -y htop
 yum install -y cloud-utils
 
 #apache
