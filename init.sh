@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e -x
-BASE=/mnt/external/init
+BASE=~/ec2init
 
-#install git
-su -c 'yum install -y git'
 
 #pull updates
 cd $BASE
