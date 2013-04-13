@@ -1,0 +1,11 @@
+when starting ec2 add the following user data:
+
+#!/bin/bash
+set -e -x
+su -c 'mount /dev/xvdf1 /mnt/external'
+su -c '/bin/bash /mnt/external/init/init.sh'
+
+Fedora-18-ec2-20130105-i386-sda (ami-cafef1be)				
+eu-west-1b				
+t1.micro				
+user	ec2-user			
