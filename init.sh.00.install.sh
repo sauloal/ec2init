@@ -1,4 +1,5 @@
 #what to install
+echo "RUNNING INSTALL"
 yum install -y byobu
 yum install -y which
 yum install -y nano
