@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e -x
 BASE=/mnt/external/init
+#install git
 su -c 'yum install -y git'
+#pull updates
 cd $BASE
 git pull
-source $BASE/begin.sh
+#run scripts
+source $BASE/init.sh.*.sh
