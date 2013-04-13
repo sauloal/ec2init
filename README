@@ -5,6 +5,11 @@ When starting ec2 add the following user data:
 ##########################
 #!/bin/bash
 set -e -x
+
+echo"[Credentials]" > ~/.boto
+echo"aws_access_key_id = <your access key>" >> ~/.boto
+echo"aws_secret_access_key = <your secret key>" >> ~/.boto
+
 su -c 'mount /dev/xvdf1 /mnt/external'
 su -c '/bin/bash /mnt/external/init/init.sh'
 #########################
