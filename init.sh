@@ -7,4 +7,4 @@ su -c 'yum install -y git'
 cd $BASE
 git pull
 #run scripts
-source $BASE/init.sh.*.sh
+source $BASE/begin.sh
