@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e -x
-BASE=/mnt/external/init
+BASE=/mnt/external3/init
 #install git
 su -c 'yum install -y git'
 #pull updates
