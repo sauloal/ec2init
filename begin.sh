@@ -4,4 +4,8 @@ set -e -x
 cd $BASE
 echo "IN BASE $PWD"
 
-source $BASE/init.sh.*.sh
+for file in $BASE/init.sh.*.sh; do
+	source $file
+done
+
+echo "DONE BEGIN"

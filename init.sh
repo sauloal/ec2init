@@ -9,5 +9,9 @@ su -c 'yum install -y git'
 cd $BASE
 git pull
 
+sleep 5
+
 #run scripts
 source $BASE/begin.sh
+
+echo "DONE INIT"
