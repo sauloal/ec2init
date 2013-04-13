@@ -4,6 +4,34 @@ set -e -x
 cd $BASE
 echo "IN BASE $PWD"
 
+
+EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname`
+
+EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname`
+EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+
+EC2_PUB_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/public-hostname`
+EC2_PUB_IPV4=`curl http://169.254.169.254/latest/meta-data/public-ipv4`
+EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type`
+
+echo "HOSTNAME      $EC2_HOSTNAME"
+echo "PRIV HOSTNAME $EC2_PRIV_HOSTNAME"
+echo "PRIV IPV4     $EC2_PRIV_IPV4"
+echo "PUB  IPV4     $EC2_PUB_IPV4"
+echo "PUB  HOSTNAME $EC2_PUB_HOSTNAME"
+echo "EC2  TYPE     $EC2_TYPE"
+
+
+echo "EC2_HOSTNAME=$EC2_HOSTNAME" > ~/.ec2
+echo "EC2_PRIV_HOSTNAME=$EC2_PRIV_HOSTNAME" >> ~/.ec2
+echo "EC2_PRIV_IPV4=$EC2_PRIV_IPV4" >> ~/.ec2
+echo "EC2_PUB_IPV4=$EC2_PUB_IPV4" >> ~/.ec2
+echo "EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME" >> ~/.ec2
+echo "EC2_TYPE=$EC2_TYPE" >> ~/.ec2
+
+echo "source ~/.ec2" > ~/.bashrc
+
+
 for file in $BASE/init.sh.*.sh; do
 	source $file
 done
