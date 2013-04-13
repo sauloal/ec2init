@@ -1,11 +1,24 @@
-when starting ec2 add the following user data:
+EC2 scripts which auto updates itself from git and runs at startup with the help of minimal user-data and cloud init
 
+When starting ec2 add the following user data:
+
+##########################
 #!/bin/bash
 set -e -x
 su -c 'mount /dev/xvdf1 /mnt/external'
 su -c '/bin/bash /mnt/external/init/init.sh'
+#########################
 
+Used with:
+https://fedoraproject.org/wiki/Cloud_images  			
 Fedora-18-ec2-20130105-i386-sda (ami-cafef1be)				
 eu-west-1b				
 t1.micro				
 user	ec2-user			
+
+iSCSI using:
+http://www.server-world.info/en/note?os=Fedora_18&p=iscsi&f=1
+
+cloud-init
+http://stackoverflow.com/questions/10125311/how-to-fire-ec2-instances-and-upload-run-a-startup-script-on-each-of-them  		
+
