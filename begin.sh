@@ -22,15 +22,20 @@ echo "PUB  HOSTNAME $EC2_PUB_HOSTNAME"
 echo "EC2  TYPE     $EC2_TYPE"
 
 
-echo "EC2_HOSTNAME=$EC2_HOSTNAME" > ~/.ec2
-echo "EC2_PRIV_HOSTNAME=$EC2_PRIV_HOSTNAME" >> ~/.ec2
-echo "EC2_PRIV_IPV4=$EC2_PRIV_IPV4" >> ~/.ec2
-echo "EC2_PUB_IPV4=$EC2_PUB_IPV4" >> ~/.ec2
-echo "EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME" >> ~/.ec2
-echo "EC2_TYPE=$EC2_TYPE" >> ~/.ec2
+echo "export EC2_HOSTNAME=$EC2_HOSTNAME"            > ~/.ec2
+echo "export EC2_PRIV_HOSTNAME=$EC2_PRIV_HOSTNAME" >> ~/.ec2
+echo "export EC2_PRIV_IPV4=$EC2_PRIV_IPV4"         >> ~/.ec2
+echo "export EC2_PUB_IPV4=$EC2_PUB_IPV4"           >> ~/.ec2
+echo "export EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME"   >> ~/.ec2
+echo "export EC2_TYPE=$EC2_TYPE"                   >> ~/.ec2
 
-echo "source ~/.ec2" >> ~/.bashrc
+
+echo "source ~/.ec2"          >> ~/.bashrc
 echo "PATH=$PATH:$BASE/tools" >> ~/.bashrc
+
+cp ~/.ec2    ~ec2-user/
+cp ~/.boto   ~ec2-user/
+cp ~/.bashrc ~ec2-user/
 
 for file in $BASE/init.sh.*.sh; do
 	source $file
