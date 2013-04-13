@@ -10,11 +10,17 @@ echo"[Credentials]" > ~/.boto
 echo"aws_access_key_id = <your access key>" >> ~/.boto
 echo"aws_secret_access_key = <your secret key>" >> ~/.boto
 
-su -c 'mount /dev/xvdf1 /mnt/external'
-su -c '/bin/bash /mnt/external/init/init.sh'
+yum install -y git
+cd ~
+git clone git://github.com/sauloal/ec2init.git
+cd ec2init
+git pull
+/bin/bash ~/ec2init/init.sh
 #########################
 
-init.sh will install git, pull the latest update and call the other scripts.
+This script will setup boto, install git and pull this repository.
+init.sh will call the remaining init scripts.
+
 
 Used with AMI:
 https://fedoraproject.org/wiki/Cloud_images  			
