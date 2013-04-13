@@ -30,7 +30,7 @@ echo "EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME" >> ~/.ec2
 echo "EC2_TYPE=$EC2_TYPE" >> ~/.ec2
 
 echo "source ~/.ec2" >> ~/.bashrc
-echo "PATH=$PATH:$BASE/s3/tools" >> ~/.bashrc
+echo "PATH=$PATH:$BASE/tools" >> ~/.bashrc
 
 for file in $BASE/init.sh.*.sh; do
 	source $file
