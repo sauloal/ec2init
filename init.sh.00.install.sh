@@ -23,7 +23,7 @@ yum install -y bridge-utils
 yum install -y openvpn
 
 #iscsi
-yum install -y libiscsi-utils.i686 scsi-target-utils.i686 lsscsi.i686
+yum install -y libiscsi-utils scsi-target-utils lsscsi
 
 #management
 unset -xe
