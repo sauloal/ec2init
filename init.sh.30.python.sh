@@ -1,8 +1,14 @@
 #what to install
 echo "UPDATING PYTHON"
 
+#boto
 easy_install boto
+# gives boto-rsync
 easy_install boto_rsync
+# gives ses-send-email and s3-geturl, among others
+easy_install boto_utils
+
+# others
 easy_install Flask
 easy_install simplejson
 easy_install jsonpickle
