@@ -1,0 +1,14 @@
+if [ -z "$1" ]; then
+ echo NO TITLE DEFINED. QUITING
+ exit
+fi
+
+if [ -z "$2" ]; then
+ echo NO MESSAGE DEFINED. QUITING
+ exit
+fi
+
+URL=`sns "$1" "$2" 2>/dev/null`
+curl -s "$URL" 2>&1 1>/dev/null
+
+
