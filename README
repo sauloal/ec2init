@@ -11,8 +11,14 @@ echo"aws_access_key_id = <your access key>" >> ~/.boto
 echo"aws_secret_access_key = <your secret key>" >> ~/.boto
 
 yum install -y git
+
+sleep 5
+
 cd ~
 git clone git://github.com/sauloal/ec2init.git
+
+sleep 5
+
 cd ec2init
 git pull
 /bin/bash ~/ec2init/init.sh
