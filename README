@@ -9,7 +9,9 @@ su -c 'mount /dev/xvdf1 /mnt/external'
 su -c '/bin/bash /mnt/external/init/init.sh'
 #########################
 
-Used with:
+init.sh will install git, pull the latest update and call the other scripts.
+
+Used with AMI:
 https://fedoraproject.org/wiki/Cloud_images  			
 Fedora-18-ec2-20130105-i386-sda (ami-cafef1be)				
 eu-west-1b				
@@ -18,7 +20,18 @@ user	ec2-user
 
 iSCSI using:
 http://www.server-world.info/en/note?os=Fedora_18&p=iscsi&f=1
+http://www.chesterproductions.net.nz/blogs/it/sysadmin/configuring-iscsi-targets-and-initiators-on-fedora-16/455/
 
-cloud-init
+cloud-init (pre-installed):
 http://stackoverflow.com/questions/10125311/how-to-fire-ec2-instances-and-upload-run-a-startup-script-on-each-of-them  		
 
+TODO:
+iSCSI
+firewall
+nfs
+samba
+vpn
+lamp
+webdav
+owncloud
+bittorrent sync
