@@ -1,14 +1,113 @@
-if [ -z "$1" ]; then
- echo NO TITLE DEFINED. QUITING
- exit
-fi
+#!/usr/bin/python
+#http://ridingpython.blogspot.nl/2011/11/aws-sns-how-to-send-out-messages-to-e.html
+import boto.ec2
+import boto.sns
+import argparse
+import os, sys
 
-if [ -z "$2" ]; then
- echo NO MESSAGE DEFINED. QUITING
- exit
-fi
+desiredregion = 'eu-west'
+desiredregion = 'eu-west-1'
 
-URL=`sns "$1" "$2" 2>/dev/null`
-curl -s "$URL" 2>&1 1>/dev/null
 
+parser = argparse.ArgumentParser(description='Send SNS message.')
+parser.add_argument('-a', '--arn'    , dest='arn'     , default=None, required=True,                              help='arn')
+parser.add_argument('-s', '--subject', dest='subject' , default=None,                                             help='subject')
+parser.add_argument('-r', '--region' , dest='region'  , default=None,                                             help='region')
+
+parser.add_argument('-m', '--message', dest='message' , default=None,                                             help='message')
+parser.add_argument('-f', '--file'   , dest='filename', default=None,                type=argparse.FileType('r'), help='filename')
+
+args = parser.parse_args()
+
+desiredarn, subject, message = ( None, None, None )
+
+
+desiredarn = args.arn
+
+
+if args.subject is None:
+    subject = "SNS message over boto"
+else:
+    subject = args.subject
+
+
+if   args.message is not None:
+    message = args.message
+elif args.filename is not None:
+    message = args.filename.read()
+else:
+    print "not message defined"
+    parser.print_help()
+    sys.exit(1)
+
+
+if args.region is not None:
+    desiredregion = args.region
+
+
+
+
+
+region  = None
+
+regions = boto.sns.regions()
+for regioninfo in regions:
+    #print regioninfo.name,
+    if regioninfo.name == desiredregion:
+         region = regioninfo
+         print "%s *" % regioninfo.name
+    #print
+
+if region is None:
+    print "not able to find to region %s" % desiredregion
+    sys.exit(1)
+
+
+
+
+
+print "message     %s" % message
+print "subject     %s" % subject
+print "region name %s" % desiredregion
+print "region      %s" % region
+
+sns            = boto.connect_sns( region=region )
+print "SNS", sns
+
+topics        = sns.get_all_topics()
+print "TOPICS", topics
+
+mytopics      = topics["ListTopicsResponse"]["ListTopicsResult"]["Topics"]
+print "MY TOPICS", mytopics
+
+#mytopic_arn   = mytopics[0]["TopicArn"]
+#print "MY TOPIC ARN", mytopic_arn
+
+#subscriptions = sns.get_all_subscriptions_by_topic(mytopic_arn)
+
+#subscriptions = sns.get_all_subscriptions()
+#print "SUBSCRIPTIONS", subscriptions
+
+arn = None
+for topic in mytopics:
+    topicarn = topic['TopicArn']
+    if topicarn == desiredarn:
+        print topicarn
+        arn = topicarn
+        print "arn         %s" % arn
+
+
+if arn is None:
+	print "requested arn %s does not exists" % desiredarn
+	sys.exit(1)
+
+#msg  = "Hi there\nI am sending this message over boto.\nYour booty Jan"
+#subj = "SNS message over boto"
+#res  = sns.publish(mytopic_arn, msg, subj)
+#res  = sns.publish(mytopic_arn, msg, "Second msg over boto")
+
+print "sending" 
+res  = sns.publish(arn, message, subject)
+print "response"
+print res
 
