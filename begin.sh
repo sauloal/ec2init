@@ -4,7 +4,7 @@ set -e -x
 cd $BASE
 echo "IN BASE $PWD"
 
-
+# http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
 EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname`
 
 EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname`
