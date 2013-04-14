@@ -20,6 +20,7 @@ echo "PRIV IPV4     $EC2_PRIV_IPV4"
 echo "PUB  IPV4     $EC2_PUB_IPV4"
 echo "PUB  HOSTNAME $EC2_PUB_HOSTNAME"
 echo "EC2  TYPE     $EC2_TYPE"
+echo "EC2  ARN      $EC2_ARN"
 
 
 echo "export EC2_HOSTNAME=$EC2_HOSTNAME"            > ~/.ec2
@@ -28,6 +29,7 @@ echo "export EC2_PRIV_IPV4=$EC2_PRIV_IPV4"         >> ~/.ec2
 echo "export EC2_PUB_IPV4=$EC2_PUB_IPV4"           >> ~/.ec2
 echo "export EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME"   >> ~/.ec2
 echo "export EC2_TYPE=$EC2_TYPE"                   >> ~/.ec2
+echo "export EC2_ARN=$EC2_ARN"                     >> ~/.ec2
 
 
 echo "source ~/.ec2"          >> ~/.bashrc
