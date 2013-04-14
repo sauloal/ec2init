@@ -42,7 +42,9 @@ cp ~/.boto   ~ec2-user/
 cp ~/.bashrc ~ec2-user/
 
 for file in $BASE/init.sh.*.sh; do
-	source $file
+	if [[ ! -e "${file}.skip" ]]; then
+		source $file
+	fi
 done
 
 echo "DONE BEGIN"
