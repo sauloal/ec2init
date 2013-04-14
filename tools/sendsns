@@ -10,12 +10,12 @@ desiredregion = 'eu-west-1'
 
 
 parser = argparse.ArgumentParser(description='Send SNS message.')
-parser.add_argument('-a', '--arn'    , dest='arn'     , default=None, required=True,                              help='arn')
-parser.add_argument('-s', '--subject', dest='subject' , default=None,                                             help='subject')
-parser.add_argument('-r', '--region' , dest='region'  , default=None,                                             help='region')
+parser.add_argument('-a', '--arn'    , dest='arn'     , default=None,                              help='arn (environment $EC2_ARN)')
+parser.add_argument('-s', '--subject', dest='subject' , default=None,                              help='subject')
+parser.add_argument('-r', '--region' , dest='region'  , default=None,                              help='region [eu-west-1] (environment $EC2_REGION)')
 
-parser.add_argument('-m', '--message', dest='message' , default=None,                                             help='message')
-parser.add_argument('-f', '--file'   , dest='filename', default=None,                type=argparse.FileType('r'), help='filename')
+parser.add_argument('-m', '--message', dest='message' , default=None,                              help='message')
+parser.add_argument('-f', '--file'   , dest='filename', default=None, type=argparse.FileType('r'), help='filename')
 
 args = parser.parse_args()
 
@@ -23,7 +23,14 @@ desiredarn, subject, message = ( None, None, None )
 
 
 desiredarn = args.arn
-
+if desiredarn is None:
+    envarn = os.environ.get['EC2_ARN']
+    if envarn is not None:
+        desiredarn = envarn
+    else:
+        print "NO ARN GIVEN AND NO ENVIRONMENT VARIABLE FOUND"
+        parser.print_help()
+        sys.exit(1)
 
 if args.subject is None:
     subject = "SNS message over boto"
@@ -43,6 +50,10 @@ else:
 
 if args.region is not None:
     desiredregion = args.region
+else:
+    envregion = os.environ.get('EC2_REGION')
+    if envregion is not None:
+        desiredregion = envregion
 
 
 
