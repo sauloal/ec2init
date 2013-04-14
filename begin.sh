@@ -35,8 +35,14 @@ echo "export EC2_TYPE=$EC2_TYPE"                   >> ~/.ec2
 echo "export EC2_ARN=$EC2_ARN"                     >> ~/.ec2
 echo "export EC2_REGION=$EC2_REGION"               >> ~/.ec2
 
+if [[ -z `grep /.ec2  ~/.bashrc` ]]; then 
+echo 'modifying bashrc'
 echo "source ~/.ec2"          >> ~/.bashrc
 echo "PATH=$PATH:$BASE/tools" >> ~/.bashrc
+
+else
+grep /.ec2  ~/.bashrc
+fi
 
 cp ~/.ec2    ~ec2-user/
 cp ~/.boto   ~ec2-user/
