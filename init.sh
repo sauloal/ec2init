@@ -6,7 +6,7 @@ BASE=~/ec2init
 # LOG
 ###########
 #http://serverfault.com/questions/103501/how-can-i-fully-log-all-bash-scripts-actions
-LOG="init.sh."`data +%Y%m%d_%H%M%S`".log"
+LOG="init.sh."`date +%Y%m%d_%H%M%S`".log"
 
 #Saves file descriptors so they can be restored to whatever they were before redirection or used themselves to output to whatever they were before the following redirect.
 exec 3>&1 4>&2
