@@ -38,4 +38,6 @@ systemctl status nfs-idmap.service
 #WEBMIN - CHANGE PASSWORD ASAP
 #port 10000
 /sbin/chkconfig webmin on
-service webmin start
+set +ex
+service webmin start &
+set -ex
