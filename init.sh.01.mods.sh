@@ -1,6 +1,6 @@
 #modifications to setup
 
-exit 0
+if [[ 0 -eq 1 ]]; then
 
 ##################
 # iSCSI
@@ -88,3 +88,5 @@ passwd tom
 Now add the user to the Samba user database:
 
 smbpasswd -a tom
+
+fi
