@@ -55,3 +55,5 @@ for file in $BASE/init.sh.*.sh; do
 done
 
 echo "DONE BEGIN"
+python ~/ec2init/tools/tools/sendsns --subject "I'm on baby" --file ~/.ec2
+echo "SENDING MESSAGE"
