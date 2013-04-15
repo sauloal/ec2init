@@ -1,0 +1,12 @@
+--- targets.conf.orig	2013-04-15 18:16:59.018250558 -0400
++++ targets.conf.new	2013-04-15 18:14:04.443244073 -0400
+@@ -15,3 +15,9 @@
+ # --ignore-errors command line option)
+ #ignore-errors yes
+ 
++#<target iqn.2012-04.ec2-54-228-22-35.eu-west-1.compute.amazonaws.com:disk>
++<target 127.0.0.1:disk>
++        backing-store /dev/xvdf
++        #initiator-address 54.228.22.35
++        incominguser saulo pass
++</target>

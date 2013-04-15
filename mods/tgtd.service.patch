@@ -1,0 +1,11 @@
+--- tgtd.service.orig	2013-04-15 18:15:41.954247795 -0400
++++ tgtd.service.new	2013-04-15 18:14:41.468245635 -0400
+@@ -7,7 +7,7 @@
+ 
+ ExecStart=/usr/sbin/tgtd -f $TGTD_OPTS
+ # see bz 848942. workaround for a race for now.
+-ExecStartPost=sleep 5
++ExecStartPost=sleep 10
+ # Put tgtd into "offline" state until all the targets are configured.
+ # We don't want initiators to (re)connect and fail the connection
+ # if it's not ready.
