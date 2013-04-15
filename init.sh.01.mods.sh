@@ -49,17 +49,21 @@ if [[ 0 -eq 1 ]]; then
 #no_all_squash ⇒ enable users’ authority
 
 if [[ ! -e "/mnt/external" ]]; then
-mkdir /mnt/external
+  mkdir /mnt/external
 fi
-patch /etc/exports < mods/nfs_exports.patch
-patch /etc/fstab   < mods/fstab.patch
+#patch /etc/exports < mods/nfs_exports.patch
+#patch /etc/fstab   < mods/fstab.patch
+
+cp --no-preserve=all mods/nfs_exports.new /etc/exports
+cp --no-preserve=all mods/fstab.new       /etc/fstab 
+
 mount -a
 
 
 ##################
 # SAMBA
 ##################
-patch /etc/smb.conf < mods/smb.conf.path
+patch /etc/smb.conf < mods/smb.conf.patch
 
 #http://www.howtoforge.com/fedora-18-samba-standalone-server-with-tdbsam-backend
 #vi /etc/samba/smb.conf
