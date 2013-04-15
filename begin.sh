@@ -51,6 +51,7 @@ cp ~/.bashrc ~ec2-user/
 for file in $BASE/init.sh.*.sh; do
 	if [[ ! -e "${file}.skip" ]]; then
 		source $file
+		touch ${file}.skip
 	fi
 done
 
