@@ -1,0 +1,37 @@
+--- smb.conf.orig	2013-04-15 06:22:08.377309173 -0400
++++ smb.conf.new	2013-04-15 08:19:05.657227747 -0400
+@@ -280,19 +280,21 @@
+ #============================ Share Definitions ==============================
+ 
+ [homes]
+-	comment = Home Directories
+ 	browseable = no
++	comment = Home Directories
+ 	writable = yes
++	available = no
+ ;	valid users = %S
+ ;	valid users = MYDOMAIN\%S
+ 
+ [printers]
+-	comment = All Printers
+-	path = /var/spool/samba
+ 	browseable = no
+-	guest ok = no
+-	writable = no
+ 	printable = yes
++	writable = no
++	path = /var/spool/samba
++	guest ok = no
++	comment = All Printers
++	available = no
+ 
+ # Un-comment the following and create the netlogon directory for Domain Logons:
+ ;	[netlogon]
+@@ -318,3 +320,7 @@
+ ;	writable = yes
+ ;	printable = no
+ ;	write list = +staff
++
++[external]
++	writeable = yes
++	path = /mnt/external

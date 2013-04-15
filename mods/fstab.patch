@@ -1,0 +1,5 @@
+--- fstab.orig	2013-04-15 12:11:53.413461651 -0400
++++ fstab.new	2013-04-15 12:10:50.873459956 -0400
+@@ -1 +1,2 @@
+ LABEL=_/   /         ext4    defaults        1 1
++/mnt/external	/export/external	bind	bind	0	
