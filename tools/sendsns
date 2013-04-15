@@ -24,7 +24,7 @@ desiredarn, subject, message = ( None, None, None )
 
 desiredarn = args.arn
 if desiredarn is None:
-    envarn = os.environ.get['EC2_ARN']
+    envarn = os.environ.get('EC2_ARN')
     if envarn is not None:
         desiredarn = envarn
     else:
