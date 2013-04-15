@@ -29,64 +29,72 @@ if [[ 0 -eq 1 ]]; then
 ##################
 #TODO:
 #http://www.learnbydoingit.org/2013/01/configuring-nfs-server-on-fedora-18/
-vi /etc/idmapd.conf
+#vi /etc/idmapd.conf
 
 # line 5: uncomment and change to your domain name
 
-Domain = server.world
+#Domain = server.world
 
-[root@master ~]# vi /etc/exports
+#[root@master ~]# vi /etc/exports
 
 # write like below *note 
-/home 10.0.0.0/24(rw,sync,no_root_squash,no_all_squash)
+#/home 10.0.0.0/24(rw,sync,no_root_squash,no_all_squash)
 
 # *note 
-/home ⇒ shared directory 
-10.0.0.0/24 ⇒ range of networks NFS permits accesses 
-rw ⇒ writable 
-sync ⇒ synchronize 
-no_root_squash ⇒ enable root privilege 
-no_all_squash ⇒ enable users’ authority
+#/home ⇒ shared directory 
+#10.0.0.0/24 ⇒ range of networks NFS permits accesses 
+#rw ⇒ writable 
+#sync ⇒ synchronize 
+#no_root_squash ⇒ enable root privilege 
+#no_all_squash ⇒ enable users’ authority
 
-
+if [[ ! -e "/mnt/external" ]]; then
+mkdir /mnt/external
+fi
+patch /etc/exports < mods/nfs_exports.patch
+patch /etc/fstab   < mods/fstab.patch
+mount -a
 
 
 ##################
 # SAMBA
 ##################
+patch /etc/smb.conf < mods/smb.conf.path
+
 #http://www.howtoforge.com/fedora-18-samba-standalone-server-with-tdbsam-backend
-vi /etc/samba/smb.conf
+#vi /etc/samba/smb.conf
 
-[...]
-[allusers]
-  comment = All Users
-  path = /home/shares/allusers
-  valid users = @users
-  force group = users
-  create mask = 0660
-  directory mask = 0771
-  writable = yes
-If you want all users to be able to read and write to their home directories via Samba, add the following lines to /etc/samba/smb.conf (make sure you comment out or remove the other [homes] section in the smb.conf file!):
+#[...]
+#[allusers]
+#  comment = All Users
+#  path = /home/shares/allusers
+#  valid users = @users
+#  force group = users
+#  create mask = 0660
+#  directory mask = 0771
+#  writable = yes
+#If you want all users to be able to read and write to their home directories via Samba, add the following lines to /etc/samba/smb.conf (make sure you comment out or remove the other [homes] section in the smb.conf file!):
 
-[...]
-[homes]
-   comment = Home Directories
-   browseable = no
-   valid users = %S
-   writable = yes
-   create mask = 0700
-   directory mask = 0700
+#[...]
+#[homes]
+#   comment = Home Directories
+#   browseable = no
+#   valid users = %S
+#   writable = yes
+#   create mask = 0700
+#   directory mask = 0700
 
-useradd tom -m -G users
+#useradd tom -m -G users
 
-Set a password for tom in the Linux system user database. If the user tom should not be able to log into the Linux system, skip this step.
+#Set a password for tom in the Linux system user database. If the user tom should not be able to log into the Linux system, skip this step.
 
-passwd tom
+#passwd tom
 
--> Enter the password for the new user.
 
-Now add the user to the Samba user database:
+#-> Enter the password for the new user.
 
-smbpasswd -a tom
+#Now add the user to the Samba user database:
+
+#smbpasswd -a tom
 
 fi
