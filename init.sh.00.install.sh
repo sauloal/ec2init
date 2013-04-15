@@ -11,6 +11,7 @@ yum install -y nano
 yum install -y htop
 yum install -y cloud-utils
 yum install -y perl-CPAN
+yum install -y patch
 
 ###############
 #apache
