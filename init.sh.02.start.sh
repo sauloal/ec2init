@@ -11,4 +11,4 @@ systemctl status tgtd.service
 
 #port 10000
 /sbin/chkconfig webmin on
-service start webmin.service
+service start webmin
