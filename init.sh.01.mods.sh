@@ -10,8 +10,13 @@ fi
 
 if [[ -z `grep $EC2_EXTERNAL_SRC /etc/fstab` ]]; then
   echo "adding external $EC2_EXTERNAL_SRC to fstab"
-  echo "$EC2_EXTERNAL_SRC   $EC2_EXTERNAL_DST        ext4    rw,user,auto,noatime,exec,relatime,seclabel,data=ordered,umask=000,errors=remount-ro    0 0" >> /etc/fstab
+  #http://blog.smartlogicsolutions.com/2009/06/04/mount-options-to-improve-ext4-file-system-performance/
+  #data=ordered
+
+  echo "$EC2_EXTERNAL_SRC   $EC2_EXTERNAL_DST        ext4    rw,user,auto,noatime,exec,relatime,seclabel,data=writeback,barrier=0,nobh,umask=000,errors=remount-ro    0 0" >> /etc/fstab
+
   mount -a
+  mount --make-shared $EC2_EXTERNAL_DST
 else
   echo "external already in fstab"
 fi
@@ -34,6 +39,8 @@ fi
 if [[ ! -e "/mnt/external/owncloud" ]]; then
   mkdir /mnt/external/owncloud
   chown -R apache:apache /mnt/external/owncloud
+  chown -R apache:apache /var/www/html/owncloud
+  chmod 0774 /mnt/external/owncloud
 fi
 
 if [[ -z `grep owncloud /etc/fstab` ]]; then
