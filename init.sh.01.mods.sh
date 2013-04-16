@@ -29,9 +29,11 @@ fi
 
 
 if [[ ! -z `mount | grep "$EC2_EXTERNAL_DST"` ]]; then
-	echo "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
-	mount $EC2_EXTERNAL_DST
+  mecho "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
+  mount $EC2_EXTERNAL_DST
   mount --make-shared $EC2_EXTERNAL_DST
+  chmod 775 $EC2_EXTERNAL_DST
+  chown floppy:floppy $EC2_EXTERNAL_DST
 else
 	echo "external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST already mounted"
 fi
