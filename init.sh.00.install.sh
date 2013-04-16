@@ -13,11 +13,6 @@ yum install -y cloud-utils
 yum install -y perl-CPAN
 yum install -y patch
 
-###############
-#apache
-###############
-#yum install -y httpd
-
 
 #TODO
 #git clone https://github.com/bobsta63/zpanelx.git zpanelx
