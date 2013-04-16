@@ -1,0 +1,34 @@
+--- /root/ec2init/mods/sshd_config.orig	2013-04-15 20:46:52.932991987 -0400
++++ /root/ec2init/mods/sshd_config.new	2013-04-15 20:51:52.177019481 -0400
+@@ -109,19 +109,19 @@
+ 
+ #AllowAgentForwarding yes
+ #AllowTcpForwarding yes
+-#GatewayPorts no
+-#X11Forwarding no
++GatewayPorts no
++##X11Forwarding no
+ X11Forwarding yes
+ #X11DisplayOffset 10
+ #X11UseLocalhost yes
+ #PrintMotd yes
+ #PrintLastLog yes
+-#TCPKeepAlive yes
++TCPKeepAlive yes
+ #UseLogin no
+ UsePrivilegeSeparation sandbox		# Default for new installations.
+ #PermitUserEnvironment no
+-#Compression delayed
+-#ClientAliveInterval 0
++Compression delayed
++ClientAliveInterval 60
+ #ClientAliveCountMax 3
+ #ShowPatchLevel no
+ #UseDNS yes
+@@ -151,4 +151,4 @@
+ #Match User anoncvs
+ #	X11Forwarding no
+ #	AllowTcpForwarding no
+-#	ForceCommand cvs server
+\ No newline at end of file
++#	ForceCommand cvs server
