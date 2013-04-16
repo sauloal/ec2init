@@ -59,6 +59,8 @@ for file in $BASE/init.sh.*.sh; do
 	fi
 done
 
+yum clean all
+
 echo "DONE BEGIN"
 python ~/ec2init/tools/sendsns --subject "I'm on baby" --file ~/.ec2
 echo "SENDING MESSAGE"
