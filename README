@@ -4,7 +4,7 @@ When starting ec2 add the following user data:
 
 ##########################
 #!/bin/bash
-set -e -x
+set -e -x -u
 
 echo"[Credentials]" > ~/.boto
 echo"aws_access_key_id = <your access key>" >> ~/.boto
