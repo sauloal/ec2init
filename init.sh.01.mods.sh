@@ -1,5 +1,88 @@
 #modifications to setup
 
+######################
+# External
+######################
+if [[ ! -e "$EC2_EXTERNAL_DST" ]]; then
+  mkdir $EC2_EXTERNAL_DST
+fi
+
+
+if [[ -z `grep $EC2_EXTERNAL_SRC /etc/fstab` ]]; then
+  echo "adding external $EC2_EXTERNAL_SRC to fstab"
+  echo "$EC2_EXTERNAL_SRC   $EC2_EXTERNAL_DST        ext4    rw,user,auto,noatime,exec,relatime,seclabel,data=ordered,umask=000,errors=remount-ro    0 0" >> /etc/fstab
+  mount -a
+else
+  echo "external already in fstab"
+fi
+
+
+#if [[ ! -z `mount | grep "$EC2_EXTERNAL_DST"` ]]; then
+#	echo "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
+#	mount $EC2_EXTERNAL_SRC $EC2_EXTERNAL_DST
+#else
+#	echo "external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST already mounted"
+#fi
+
+
+
+
+
+#################
+# OwnCloud
+#################
+if [[ ! -e "/mnt/external/owncloud" ]]; then
+  mkdir /mnt/external/owncloud
+  chown -R apache:apache /mnt/external/owncloud
+fi
+
+if [[ -z `grep owncloud /etc/fstab` ]]; then
+  echo "adding owncloud to fstab"
+  echo "/mnt/external/owncloud   /var/www/html/owncloud/data/        bind    bind    0" >> /etc/fstab
+  mount -a
+else
+  echo "owncloud already in fstab"
+fi
+
+
+
+
+
+######################
+# SSH
+######################
+#https://wiki.archlinux.org/index.php/Sshfs
+#http://ubuntuforums.org/showthread.php?t=1182295
+#TODO:
+# /etc/passwd:
+# user:1003:1003:User,,,:/:/usr/sbin/nologin
+#
+#/etc/group:
+#sftp:1004:user
+#
+#/etc/ssh/sshd_config:
+# Logging
+#SyslogFacility AUTH
+#LogLevel DEBUG
+#Subsystem sftp internal-sftp
+#Match group sftp
+#ForceCommand internal-sftp
+#ChrootDirectory /var/sshbox
+
+#http://serverfault.com/questions/431169/is-it-possible-to-allow-key-based-authentication-for-sshd-cofnig-chroot-sftp-use
+#OR:
+#Match Group sftpusers
+#        ChrootDirectory /sftp/%u
+#        ForceCommand internal-sftp
+#        PubkeyAuthentication yes
+#        AuthorizedKeysFile     %h/.ssh/authorized_keys
+
+cp --no-preserve=all mods/sshd_config.new /etc/ssh/sshd_config
+
+
+
+
+
 if [[ 0 -eq 1 ]]; then
 echo mods
 ##################
@@ -103,51 +186,4 @@ echo mods
 
 fi
 
-
-
-
-
-
-if [[ ! -e "$EC2_EXTERNAL_DST" ]]; then
-  mkdir $EC2_EXTERNAL_DST
-fi
-
-
-if [[ ! -z `mount | grep "$EC2_EXTERNAL_DST"` ]]; then
-	echo "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
-	mount $EC2_EXTERNAL_SRC $EC2_EXTERNAL_DST
-else
-	echo "external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST already mounted"
-fi
-
-
-
-
-#https://wiki.archlinux.org/index.php/Sshfs
-#http://ubuntuforums.org/showthread.php?t=1182295
-#TODO:
-# /etc/passwd:
-# user:1003:1003:User,,,:/:/usr/sbin/nologin
-#
-#/etc/group:
-#sftp:1004:user
-#
-#/etc/ssh/sshd_config:
-# Logging
-#SyslogFacility AUTH
-#LogLevel DEBUG
-#Subsystem sftp internal-sftp
-#Match group sftp
-#ForceCommand internal-sftp
-#ChrootDirectory /var/sshbox
-
-#http://serverfault.com/questions/431169/is-it-possible-to-allow-key-based-authentication-for-sshd-cofnig-chroot-sftp-use
-#OR:
-#Match Group sftpusers
-#        ChrootDirectory /sftp/%u
-#        ForceCommand internal-sftp
-#        PubkeyAuthentication yes
-#        AuthorizedKeysFile     %h/.ssh/authorized_keys
-
-cp --no-preserve=all mods/sshd_config.new /etc/ssh/sshd_config
 
