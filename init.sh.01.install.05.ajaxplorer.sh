@@ -1,3 +1,9 @@
+################
+# ajax explorer
+################
+#todo: setup folders
+set -xeu
+
 rpm -Uvh http://dl.ajaxplorer.info/repos/el6/ajaxplorer-stable/ajaxplorer-release-4-1.noarch.rpm
 
 
