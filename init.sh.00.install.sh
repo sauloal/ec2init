@@ -4,6 +4,8 @@ echo "RUNNING INSTALL"
 ###############
 #misc
 ###############
+yum update -y
+
 yum install -y wget
 yum install -y byobu
 yum install -y which
