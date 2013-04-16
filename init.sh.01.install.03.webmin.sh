@@ -1,7 +1,7 @@
 ###############
 #management - webmin
 ###############
-set +xe
+set -xeu
 
 WEBMINTMP=/tmp/webmin-1.620-1.noarch.rpm
 if [[ ! -f "${WEBMINTMP}" ]]; THEN
@@ -11,15 +11,15 @@ if [[ ! -f "${WEBMINTMP}" ]]; THEN
   #http://prdownloads.sourceforge.net/webadmin/webmin-1.620-1.noarch.rpm
 fi
 
-set -xe
+
 yum install -y perl make openssl perl-Authen-PAM
 
 
 #WEBMIN - CHANGE PASSWORD ASAP
 #port 10000
 /sbin/chkconfig webmin on
-set +ex
+set +xeu
 service webmin start &
-set -ex
+set -xeu
 
 
