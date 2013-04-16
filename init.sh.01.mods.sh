@@ -1,5 +1,6 @@
 #modifications to setup
-cp --no-preserve=all mods/sshd_config.new /etc/ssh/sshd_config
+cp -f --no-preserve=all mods/sshd_config.new /etc/ssh/sshd_config
+service sshd restart
 
 ######################
 # SSH
