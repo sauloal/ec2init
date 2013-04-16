@@ -26,18 +26,19 @@ yum install -y samba samba-client
 ###############
 #nfs
 ###############
-yum install -y nfs-utils
+#yum install -y nfs-utils
 
 ###############
 #vpn
 ###############
-yum install -y bridge-utils
-yum install -y openvpn
+#yum install -y bridge-utils
+#yum install -y openvpn
 
 ###############
 #iscsi
 ###############
-yum install -y libiscsi-utils scsi-target-utils lsscsi
+#yum install -y libiscsi-utils scsi-target-utils lsscsi
+#yum install -y ntfs-3g ntfsprogs
 
 ###############
 #management - webmin

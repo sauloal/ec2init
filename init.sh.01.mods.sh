@@ -48,22 +48,22 @@ if [[ 0 -eq 1 ]]; then
 #no_root_squash ⇒ enable root privilege 
 #no_all_squash ⇒ enable users’ authority
 
-if [[ ! -e "/mnt/external" ]]; then
-  mkdir /mnt/external
-fi
+#if [[ ! -e "/mnt/external" ]]; then
+#  mkdir /mnt/external
+#fi
 #patch /etc/exports < mods/nfs_exports.patch
 #patch /etc/fstab   < mods/fstab.patch
 
-cp --no-preserve=all mods/nfs_exports.new /etc/exports
-cp --no-preserve=all mods/fstab.new       /etc/fstab 
+#cp --no-preserve=all mods/nfs_exports.new /etc/exports
+#cp --no-preserve=all mods/fstab.new       /etc/fstab 
 
-mount -a
+#mount -a
 
 
 ##################
 # SAMBA
 ##################
-patch /etc/smb.conf < mods/smb.conf.patch
+#patch /etc/smb.conf < mods/smb.conf.patch
 
 #http://www.howtoforge.com/fedora-18-samba-standalone-server-with-tdbsam-backend
 #vi /etc/samba/smb.conf
@@ -102,3 +102,16 @@ patch /etc/smb.conf < mods/smb.conf.patch
 #smbpasswd -a tom
 
 fi
+
+if [[ ! -e "$EC2_EXTERNAL_DST" ]]; then
+  mkdir $EC2_EXTERNAL_DST
+fi
+
+
+if [[ ! -z `mount | grep "$EC2_EXTERNAL_DST"` ]]; then
+	echo "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
+	mount $EC2_EXTERNAL_SRC $EC2_EXTERNAL_DST
+else
+	echo "external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST already mounted"
+fi
+
