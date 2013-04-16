@@ -1,17 +1,20 @@
 #modifications to setup
 
+setenforce 0
+cp --no-preserve=all mods/selinux.new /etc/sysconfig/selinux
+
 ######################
 # External
 ######################
-usermod -a -G floppy ec2-user
-usermod -a -G floppy root
-usermod -a -G floppy apache
-useradd -g floppy -G floppy -d /mnt -M -r -s /sbin/nologin -u 19 floppy
+#usermod -a -G floppy ec2-user
+#usermod -a -G floppy root
+#usermod -a -G floppy apache
+#useradd -g floppy -G floppy -d /mnt -M -r -s /sbin/nologin -u 19 floppy
 
 if [[ ! -e "$EC2_EXTERNAL_DST" ]]; then
   mkdir $EC2_EXTERNAL_DST
-  chown floppy:floppy $EC2_EXTERNAL_DST
-  chmod 775 $EC2_EXTERNAL_DST
+#  chown floppy:floppy $EC2_EXTERNAL_DST
+#  chmod 775 $EC2_EXTERNAL_DST
 fi
 
 
@@ -21,7 +24,7 @@ if [[ -z `grep $EC2_EXTERNAL_SRC /etc/fstab` ]]; then
   #gid 19 = floppy
   #data=ordered
 
-  echo "$EC2_EXTERNAL_SRC   $EC2_EXTERNAL_DST        ext4    rw,user,auto,noatime,exec,relatime,seclabel,gid=19,data=writeback,barrier=0,nobh,umask=000,errors=remount-ro    0 0" >> /etc/fstab
+  echo "$EC2_EXTERNAL_SRC   $EC2_EXTERNAL_DST        ext4    rw,user,auto,noatime,exec,relatime,seclabel,data=writeback,barrier=0,nobh,errors=remount-ro    0 0" >> /etc/fstab
 
 else
   echo "external already in fstab"
@@ -32,8 +35,8 @@ if [[ ! -z `mount | grep "$EC2_EXTERNAL_DST"` ]]; then
   mecho "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
   mount $EC2_EXTERNAL_DST
   mount --make-shared $EC2_EXTERNAL_DST
-  chmod 775 $EC2_EXTERNAL_DST
-  chown floppy:floppy $EC2_EXTERNAL_DST
+#  chmod 775 $EC2_EXTERNAL_DST
+#  chown floppy:floppy $EC2_EXTERNAL_DST
 else
 	echo "external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST already mounted"
 fi
@@ -46,24 +49,27 @@ fi
 # OwnCloud
 #################
 if [[ ! -e "$EC2_EXTERNAL_DST/owncloud" ]]; then
-  mkdir $EC2_EXTERNAL_DST/owncloud
-  chown -R apache:apache $EC2_EXTERNAL_DST/owncloud
+  mkdir -p $EC2_EXTERNAL_DST/owncloud/data
+  chown -R apache:apache $EC2_EXTERNAL_DST/owncloud/data
   chown -R apache:apache /var/www/html/owncloud
   chmod 0774 $EC2_EXTERNAL_DST/owncloud
-  mount --bind $EC2_EXTERNAL_DST/owncloud/ /var/www/html/owncloud/data
-  mount --make-shared /var/www/html/owncloud/data
+  chmod 0774 $EC2_EXTERNAL_DST/owncloud/data
 fi
 
 if [[ -z `grep owncloud /etc/fstab` ]]; then
   echo "adding owncloud to fstab"
-  echo "/mnt/external/owncloud   /var/www/html/owncloud/data/        bind    bind    0" >> /etc/fstab
-  mount -a
+  echo "$EC2_EXTERNAL_DST/owncloud/data   /var/www/html/owncloud/data/        bind    bind    0" >> /etc/fstab
 else
   echo "owncloud already in fstab"
 fi
 
-
-
+if [[ ! -z `mount | grep "owncloud"` ]]; then
+  echo "mounting owncloud"
+  mount --bind $EC2_EXTERNAL_DST/owncloud/data /var/www/html/owncloud/data
+  mount --make-shared /var/www/html/owncloud/data
+else
+  echo "owncloud already mounted"
+fi
 
 
 ######################
