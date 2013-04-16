@@ -16,7 +16,7 @@ yum install -y patch
 ###############
 #apache
 ###############
-yum install -y httpd
+#yum install -y httpd
 
 ###############
 #samba
