@@ -70,20 +70,6 @@ chown -R apache:apache /var/www/html/owncloud
 chmod 0774 /mnt/external/owncloud
 
 
-if [[ ! -e "/mnt/external/owncloud" ]]; then
-  mkdir /mnt/external/owncloud
-  chown -R apache:apache /mnt/external/owncloud
-fi
-
-if [[ -z `grep owncloud /etc/fstab` ]]; then
-  echo "adding owncloud to fstab"
-  echo "/mnt/external/owncloud   /var/www/html/owncloud/data/        bind    bind    0" >> /etc/fstab
-  mount -a
-else
-  echo "owncloud already in fstab"
-fi
-
-
 
 
 #TODO
