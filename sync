@@ -1,0 +1,1 @@
+for P in *; do echo $P;  boto-rsync s3://$P $P; done
