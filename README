@@ -27,6 +27,13 @@ git pull
 /bin/bash ~/ec2init/init.sh
 #########################
 
+To create your disk:
+#format
+mke2fs -t ext4 /dev/xvdf
+#convert to use 256 byte inodes for greater efficiency
+tune2fs -I 256 /dev/xvdf
+tune2fs -o journal_data_writeback /dev/xvdf
+
 This script will setup boto, install git and pull this repository.
 init.sh will call the remaining init scripts.
 
