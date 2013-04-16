@@ -12,7 +12,7 @@ yum install -y htop
 yum install -y cloud-utils
 yum install -y perl-CPAN
 yum install -y patch
-
+yum install -y binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
 
 #TODO
 #git clone https://github.com/bobsta63/zpanelx.git zpanelx
