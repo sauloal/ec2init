@@ -57,5 +57,34 @@ set -xe
 yum install -y perl make openssl perl-Authen-PAM
 
 
+###############
+#ownclound
+#http://software.opensuse.org/download/package?project=isv:ownCloud:community&package=owncloud
+#http://ubuntuserverguide.com/2013/04/how-to-setup-owncloud-server-5-with-ssl-connection.html
+###############
+cd /etc/yum.repos.d/
+wget http://download.opensuse.org/repositories/isv:ownCloud:community/Fedora_18/isv:ownCloud:community.repo
+yum install owncloud
+service httpd restart
+chown -R apache:apache /var/www/html/owncloud
+chmod 0774 /mnt/external/owncloud
+
+
+if [[ ! -e "/mnt/external/owncloud" ]]; then
+  mkdir /mnt/external/owncloud
+  chown -R apache:apache /mnt/external/owncloud
+fi
+
+if [[ -z `grep owncloud /etc/fstab` ]]; then
+  echo "adding owncloud to fstab"
+  echo "/mnt/external/owncloud   /var/www/html/owncloud/data/        bind    bind    0" >> /etc/fstab
+  mount -a
+else
+  echo "owncloud already in fstab"
+fi
+
+
+
+
 #TODO
 #git clone https://github.com/bobsta63/zpanelx.git zpanelx
