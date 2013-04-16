@@ -1,6 +1,7 @@
 ################
 # ajax explorer
 ################
+#http://ajaxplorer.info/documentation/administration/
 #todo: setup folders
 set -xeu
 
