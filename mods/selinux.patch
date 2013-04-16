@@ -1,0 +1,12 @@
+--- selinux.orig	2013-04-16 08:49:36.678916799 -0400
++++ selinux.new	2013-04-16 08:49:14.098915580 -0400
+@@ -4,7 +4,8 @@
+ #     enforcing - SELinux security policy is enforced.
+ #     permissive - SELinux prints warnings instead of enforcing.
+ #     disabled - No SELinux policy is loaded.
+-SELINUX=enforcing
++#SELINUX=enforcing
++SELINUX=permissive
+ # SELINUXTYPE= can take one of these two values:
+ #     targeted - Targeted processes are protected,
+ #     minimum - Modification of targeted policy. Only selected processes are protected. 
