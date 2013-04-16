@@ -4,7 +4,7 @@
 set -xeu
 
 WEBMINTMP=/tmp/webmin-1.620-1.noarch.rpm
-if [[ ! -f "${WEBMINTMP}" ]]; THEN
+if [[ ! -f "${WEBMINTMP}" ]]; then
   wget -O $WEBMINTMP 'http://downloads.sourceforge.net/project/webadmin/webmin/1.620/webmin-1.620-1.noarch.rpm?r=http%3A%2F%2Fwww.webmin.com%2Fdownload.html&ts=1365823599&use_mirror=surfnet'
   yum install -y $WEBMINTMP
   #rm -f $WEBMINTMP
