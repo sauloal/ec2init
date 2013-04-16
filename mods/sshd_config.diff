@@ -1,5 +1,14 @@
 --- /root/ec2init/mods/sshd_config.orig	2013-04-15 20:46:52.932991987 -0400
-+++ /root/ec2init/mods/sshd_config.new	2013-04-15 20:51:52.177019481 -0400
++++ /root/ec2init/mods/sshd_config.new	2013-04-15 21:06:58.462074000 -0400
+@@ -42,7 +42,7 @@
+ # Authentication:
+ 
+ #LoginGraceTime 2m
+-#PermitRootLogin yes
++PermitRootLogin no
+ #StrictModes yes
+ #MaxAuthTries 6
+ #MaxSessions 10
 @@ -109,19 +109,19 @@
  
  #AllowAgentForwarding yes
@@ -25,7 +34,15 @@
  #ClientAliveCountMax 3
  #ShowPatchLevel no
  #UseDNS yes
-@@ -151,4 +151,4 @@
+@@ -130,6 +130,7 @@
+ #PermitTunnel no
+ #ChrootDirectory none
+ #VersionAddendum none
++Ciphers blowfish-cbc,arcfour,aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,cast128-cbc,aes192-cbc,aes256-cbc
+ 
+ # no default banner path
+ #Banner none
+@@ -151,4 +152,4 @@
  #Match User anoncvs
  #	X11Forwarding no
  #	AllowTcpForwarding no

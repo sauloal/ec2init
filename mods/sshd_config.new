@@ -42,7 +42,7 @@ SyslogFacility AUTHPRIV
 # Authentication:
 
 #LoginGraceTime 2m
-#PermitRootLogin yes
+PermitRootLogin no
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -130,6 +130,7 @@ ClientAliveInterval 60
 #PermitTunnel no
 #ChrootDirectory none
 #VersionAddendum none
+Ciphers blowfish-cbc,arcfour,aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,cast128-cbc,aes192-cbc,aes256-cbc
 
 # no default banner path
 #Banner none
