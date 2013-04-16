@@ -6,6 +6,7 @@
 usermod -a -G floppy ec2-user
 usermod -a -G floppy root
 usermod -a -G floppy apache
+useradd -g floppy -G floppy -d /mnt -M -r -s /sbin/nologin -u 19 floppy
 
 if [[ ! -e "$EC2_EXTERNAL_DST" ]]; then
   mkdir $EC2_EXTERNAL_DST
