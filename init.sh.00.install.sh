@@ -66,8 +66,6 @@ cd /etc/yum.repos.d/
 wget http://download.opensuse.org/repositories/isv:ownCloud:community/Fedora_18/isv:ownCloud:community.repo
 yum install owncloud
 service httpd restart
-chown -R apache:apache /var/www/html/owncloud
-chmod 0774 /mnt/external/owncloud
 
 
 
