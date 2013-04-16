@@ -4,11 +4,11 @@ When starting ec2 add the following user data:
 
 ##########################
 #!/bin/bash
-set -e -x -u
+set -xeu
 
-echo"[Credentials]" > ~/.boto
-echo"aws_access_key_id = <your access key>" >> ~/.boto
-echo"aws_secret_access_key = <your secret key>" >> ~/.boto
+echo "[Credentials]" > ~/.boto
+echo "aws_access_key_id = <your access key>" >> ~/.boto
+echo "aws_secret_access_key = <your secret key>" >> ~/.boto
 export EC2_ARN=arn:aws:sns:eu-west-1:422995397549:saulo_ec2
 export EC2_EXTERNAL_SRC=/dev/xvdf
 export EC2_EXTERNAL_DST=/mnt/external
