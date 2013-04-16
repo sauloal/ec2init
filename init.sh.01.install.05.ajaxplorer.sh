@@ -15,3 +15,7 @@ cp -f --no-preserve=all mods/bootstrap_conf.php /etc/ajaxplorer/bootstrap_conf.p
 cp -f --no-preserve=all mods/ajaxplorer.conf /etc/httpd/conf.d/ajaxplorer.conf
 
 /bin/systemctl restart  httpd.service
+
+
+yum install -y gallery2
+yum install -y wordpress
