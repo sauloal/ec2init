@@ -10,6 +10,7 @@ useradd -g floppy -G floppy -d /mnt -M -r -s /sbin/nologin -u 19 floppy
 
 if [[ ! -e "$EC2_EXTERNAL_DST" ]]; then
   mkdir $EC2_EXTERNAL_DST
+  chown floppy:floppy $EC2_EXTERNAL_DST
   chmod 775 $EC2_EXTERNAL_DST
 fi
 
