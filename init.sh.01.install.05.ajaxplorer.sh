@@ -28,3 +28,4 @@ cp -f --no-preserve=all mods/ajaxplorer.conf /etc/httpd/conf.d/ajaxplorer.conf
 #https://github.com/sitaramc/gitolite
 #
 #https://github.com/res0nat0r/gitosis#readme
+#zabbix
