@@ -15,6 +15,7 @@ yum install -y cloud-utils
 yum install -y perl-CPAN
 yum install -y patch
 yum install -y mlocate
+yum remove -y audit
 yum install -y binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
 
 #TODO
