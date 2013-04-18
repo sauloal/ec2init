@@ -19,6 +19,8 @@ EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/documen
 #TODO:
 # CHECK VOL
 # ATTACH VOL
+# http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ApiReference-cmd-AttachVolume.html
+# ec2-attach-volume -d /dev/sdh -i i-11111111 vol-0000000
 
 if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
 	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
