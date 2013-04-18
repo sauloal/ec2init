@@ -52,21 +52,3 @@ http://www.chesterproductions.net.nz/blogs/it/sysadmin/configuring-iscsi-targets
 
 cloud-init (pre-installed):
 http://stackoverflow.com/questions/10125311/how-to-fire-ec2-instances-and-upload-run-a-startup-script-on-each-of-them  		
-
-TODO:
-bittorrent sync
-darkstat http://unix4lyfe.org/darkstat/
-webdav
-dynIp
-
-easy_install pip
-pip install Glances
-
-. lamp
-
-v owncloud
-x iSCSI
-x firewall
-x nfs
-x samba
-x vpn
