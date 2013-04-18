@@ -1,1 +1,7 @@
-for P in *; do echo $P;  boto-rsync s3://$P $P; done
+for P in *; do 
+  if [[ -d "${P}" ]]; then
+    echo $P
+    boto-rsync s3://$P $P
+    echo "$P synced"
+  fi
+done
