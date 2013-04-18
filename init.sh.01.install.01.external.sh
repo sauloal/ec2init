@@ -27,7 +27,7 @@ fi
 
 
 if [[ -z `mount | grep "$EC2_EXTERNAL_DST"` ]]; then
-  mecho "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
+  echo "mounting external $EC2_EXTERNAL_SRC to $EC2_EXTERNAL_DST"
   mount $EC2_EXTERNAL_DST
   mount --make-shared $EC2_EXTERNAL_DST
 #  chmod 775 $EC2_EXTERNAL_DST
