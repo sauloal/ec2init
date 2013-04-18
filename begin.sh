@@ -16,6 +16,10 @@ EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type`
 # http://stackoverflow.com/questions/4249488/find-region-from-within-ec2-instance
 EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
 
+#TODO:
+# CHECK VOL
+# ATTACH VOL
+
 if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
 	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
 		EC2_EXTERNAL_PRESENT=""
@@ -34,6 +38,7 @@ echo "PUB  HOSTNAME     $EC2_PUB_HOSTNAME"
 echo "EC2  TYPE         $EC2_TYPE"
 echo "EC2  ARN          $EC2_ARN"
 echo "EC2  REGION       $EC2_REGION"
+echo "EC2  EXTERNAL VOL $EC2_EXTERNAL_VOL"
 echo "EC2  EXTERNAL SRC $EC2_EXTERNAL_SRC"
 echo "EC2  EXTERNAL DST $EC2_EXTERNAL_DST"
 echo "EC2  EXTERNAL PRE $EC2_EXTERNAL_PRESENT"
@@ -47,6 +52,7 @@ echo "export EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME"         >> ~/.ec2
 echo "export EC2_TYPE=$EC2_TYPE"                         >> ~/.ec2
 echo "export EC2_ARN=$EC2_ARN"                           >> ~/.ec2
 echo "export EC2_REGION=$EC2_REGION"                     >> ~/.ec2
+echo "export EC2_EXTERNAL_VOL=$EC2_EXTERNAL_VOL"         >> ~/.ec2
 echo "export EC2_EXTERNAL_SRC=$EC2_EXTERNAL_SRC"         >> ~/.ec2
 echo "export EC2_EXTERNAL_DST=$EC2_EXTERNAL_DST"         >> ~/.ec2
 echo "export EC2_EXTERNAL_PRESENT=$EC2_EXTERNAL_PRESENT" >> ~/.ec2
