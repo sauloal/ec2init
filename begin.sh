@@ -17,7 +17,11 @@ EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type`
 EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
 
 if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
-	EC2_EXTERNAL_PRESENT=`fdisk -l | grep $EC2_EXTERNAL_SRC`
+	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
+		EC2_EXTERNAL_PRESENT=""
+	else
+		EC2_EXTERNAL_PRESENT="OK"
+	fi
 else
 	EC2_EXTERNAL_PRESENT=""
 fi
