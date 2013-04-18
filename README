@@ -13,17 +13,18 @@ export EC2_ARN=arn:aws:sns:eu-west-1:422995397549:saulo_ec2
 export EC2_EXTERNAL_SRC=/dev/xvdf
 export EC2_EXTERNAL_DST=/mnt/external
 
-yum install -y git
-
-sleep 5
+sleep 2
 
 cd ~
 git clone git://github.com/sauloal/ec2init.git
 
-sleep 5
+sleep 2
 
 cd ec2init
 git pull
+
+sleep 2
+
 /bin/bash ~/ec2init/init.sh
 #########################
 
