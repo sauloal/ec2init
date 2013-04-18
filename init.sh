@@ -6,7 +6,9 @@ BASE=~/ec2init
 # LOG
 ###########
 #http://serverfault.com/questions/103501/how-can-i-fully-log-all-bash-scripts-actions
-LOG="init.sh."`date +%Y%m%d_%H%M%S`".log"
+DATESTR=`date +%Y%m%d_%H%M%S`
+LOG="init.sh.${DATESTR}.log"
+ERR="init.sh.${DATESTR}.err"
 
 #Saves file descriptors so they can be restored to whatever they were before redirection or used themselves to output to whatever they were before the following redirect.
 #exec 3>&1 4>&2
@@ -31,6 +33,7 @@ sleep 5
 ###########
 (
 source $BASE/begin.sh
-) | tee $LOG
+) > >( tee $LOG ) 2> >( tee $ERR >&2 )
+
 
 echo "DONE INIT"
