@@ -18,7 +18,7 @@ EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type`
 EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
 
 
-curl https://$DYN_LOGIN:DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4
+curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4
 
 #TODO:
 # CHECK IF VARIABLE IS SET
