@@ -17,6 +17,8 @@ export DYN_LOGIN=
 export DYN_PASS=
 export DYN_HOST=
 
+yum install -y git
+
 sleep 2
 
 cd ~
