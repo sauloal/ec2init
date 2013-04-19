@@ -13,6 +13,9 @@ export EC2_ARN=arn:aws:sns:eu-west-1:422995397549:saulo_ec2
 export EC2_EXTERNAL_VOL=vol-2bd8a406
 export EC2_EXTERNAL_SRC=/dev/xvdf
 export EC2_EXTERNAL_DST=/mnt/external
+export DYN_LOGIN=
+export DYN_PASS=
+export DYN_HOST=
 
 sleep 2
 
