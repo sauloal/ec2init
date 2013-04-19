@@ -12,9 +12,13 @@ EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
 
 EC2_PUB_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/public-hostname`
 EC2_PUB_IPV4=`curl http://169.254.169.254/latest/meta-data/public-ipv4`
+
 EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type`
 # http://stackoverflow.com/questions/4249488/find-region-from-within-ec2-instance
 EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
+
+
+curl https://$DYN_LOGIN:DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4
 
 #TODO:
 # CHECK IF VARIABLE IS SET
