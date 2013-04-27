@@ -7,40 +7,47 @@ import boto.ec2
 
 
 #http://devblog.seomoz.org/2011/08/launching-and-deploying-instances-with-boto-and-fabric/
-svo       = os.environ.get('EC2_EXTERNAL_VOL')
-src       = os.environ.get('EC2_EXTERNAL_SRC')
-iid       = os.environ.get('EC2_INST_ID')
-envregion = os.environ.get('EC2_REGION')
-
 
 parser = argparse.ArgumentParser(description='Attach EBS volume.')
-parser.add_argument('-i', '--instance-id', metavar='INSTANCE'   , type=str, nargs=1, help='instance id [i-???????][EC2_INST_ID]')
-parser.add_argument('-v', '--volume-id'  , metavar='VOLUME'     , type=str, nargs=1, help='volume id [vol-?????][EC2_EXTERNAL_VOL]')
-parser.add_argument('-d', '--destination', metavar='DESTINATION', type=str, nargs=1, help='destination device [/dev/????][EC2_EXTERNAL_SRC]')
-parser.add_argument('-r', '--region'     , metavar='REGION'     , type=str, nargs=1, help='region [eu-west][EC2_REGION]')
+parser.add_argument('-i', '--instance-id', dest='instance'   , default=None, metavar='INSTANCE'   , type=str, nargs=1, help='instance id [i-???????][EC2_INST_ID]')
+parser.add_argument('-v', '--volume-id'  , dest='volume'     , default=None, metavar='VOLUME'     , type=str, nargs=1, help='volume id [vol-?????][EC2_EXTERNAL_VOL]')
+parser.add_argument('-d', '--destination', dest='destination', default=None, metavar='DESTINATION', type=str, nargs=1, help='destination device [/dev/????][EC2_EXTERNAL_SRC]')
+parser.add_argument('-r', '--region'     , dest='region'     , default=None, metavar='REGION'     , type=str, nargs=1, help='region [eu-west][EC2_REGION]')
 
 
 print "volume %s src %s instance id %s region %s" % (svo, src, iid, envregion)
 
+svo = parser.volume
 if svo       is None: 
-	print "no volume defined"
-	parser.print_help()
-	sys.exit(1)
+	svo       = os.environ.get('EC2_EXTERNAL_VOL')
+	if svo is None:
+		print "no volume defined"
+		parser.print_help()
+		sys.exit(1)
 
+src = parser.destination
 if src       is None:
-	print "no src defined" 
-	parser.print_help()
-	sys.exit(1)
+	src       = os.environ.get('EC2_EXTERNAL_SRC')
+	if src is None:
+		print "no src defined" 
+		parser.print_help()
+		sys.exit(1)
 
+iid = parser.instance
 if iid       is None: 
-	print "no instance id"
-	parser.print_help()
-	sys.exit(1)
+	iid       = os.environ.get('EC2_INST_ID')
+	if iid is None:
+		print "no instance id"
+		parser.print_help()
+		sys.exit(1)
 
+envregion = parser.region
 if envregion is None: 
-	print "no region"
-	parser.print_help()
-	sys.exit(1)
+	envregion = os.environ.get('EC2_REGION')
+	if envregion is None:
+		print "no region"
+		parser.print_help()
+		sys.exit(1)
 
 
 #desiredregion = 'eu-west'
