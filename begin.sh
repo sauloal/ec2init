@@ -47,6 +47,9 @@ sleep 10
 
 
 
+
+
+
 if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
 	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
 		EC2_EXTERNAL_PRESENT=""

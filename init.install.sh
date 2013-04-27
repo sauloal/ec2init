@@ -4,7 +4,7 @@ echo "RUNNING INSTALL"
 ###############
 #misc
 ###############
-yum update -y
+yum update  -y
 
 yum install -y wget
 yum install -y byobu
@@ -54,6 +54,23 @@ yum clean all
 
 
 
+
+
+
+#boto
+easy_install boto
+# gives boto-rsync
+easy_install boto_rsync
+# gives ses-send-email and s3-geturl, among others
+easy_install boto_utils
+
+
+
+
+
+
+
+
 #TODO
 #git clone https://github.com/bobsta63/zpanelx.git zpanelx
 
@@ -81,12 +98,5 @@ yum clean all
 echo 'export JAVA_HOME=/usr/java/latest' >> /etc/profile.d/saulo.sh
 
 
-yum clean all
 
 
-#boto
-easy_install boto
-# gives boto-rsync
-easy_install boto_rsync
-# gives ses-send-email and s3-geturl, among others
-easy_install boto_utils
