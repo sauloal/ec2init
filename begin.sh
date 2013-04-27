@@ -20,7 +20,7 @@ EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type 2>/dev/null
 EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document 2>/dev/null | grep region | awk -F\" '{print $4}'`
 
 
-curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4
+curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4 2>/dev/null
 
 #TODO:
 # CHECK IF VARIABLE IS SET
@@ -43,7 +43,18 @@ else
 	echo "yum libraries already installed"
 fi
 
+
+
+
+
+export EC2_INST_ID=$EC2_INST_ID
+export EC2_EXTERNAL_VOL=$EC2_EXTERNAL_VOL
+export EC2_EXTERNAL_SRC=$EC2_EXTERNAL_SRC
+export EC2_EXTERNAL_DST=$EC2_EXTERNAL_DST
+echo "ATTACHING VOLUME"
+echo "ATTACHING VOLUME $EC2_EXTERNAL_VOL TO INSTANCE $EC2_INST_ID TO DEVICE $EC2_EXTERNAL_SRC"
 python ~/ec2init/tools/attachvolume.py
+echo "VOLUME ATTACHED"
 sleep 10
 
 
