@@ -22,7 +22,7 @@ yum install -y unzip
 
 
 
-if [[ -z `yum list | gawk '{print $1}' | grep rpmfusion-free` ]]; then
+if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
 	wget -O /tmp/fusion_free.rpm  http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-18.noarch.rpm
 	yum install -yt --skip-broken /tmp/fusion_free.rpm
 else
@@ -30,7 +30,8 @@ else
 fi
 
 
-if [[ -z `yum list | gawk '{print $1}' | grep rpmfusion-nonfree` ]]; then
+
+if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-nonfree` ]]; then
 	wget -O /tmp/fusion_nfree.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-18.noarch.rpm
 	yum install -yt --skip-broken /tmp/fusion_nfree.rpm
 else
@@ -38,19 +39,18 @@ else
 fi
 
 
-yum clean all
-
-
 
 #yum remove java java-devel
 
-if [[ -z `yum list | grep jre.i586` ]]; then
+if [[ -z `yum list installed | grep jre.i586` ]]; then
 	wget -O /tmp/jre.rpm 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=76850'
 	yum install -yt --skip-broken /tmp/jre.rpm
 else
 	echo "jre already installed"
 fi
 
+
+yum clean all
 
 
 
