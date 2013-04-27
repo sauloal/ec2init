@@ -61,16 +61,22 @@ def unattachedvolumes():
            print unattachedvol.id, state
 
 def attachosvol():
-   print "mapping volume %s to instance %s from %s to %s" % (svo, iid, src, dst)
+   print "mapping volume %s to instance %s from %s" % (svo, iid, src)
 
+   success = False
    for unattachedvol in vol:
        state = unattachedvol.attachment_state()
 
        if state == None:
            print unattachedvol.id, state
            if unattachedvol.id == svo:
+               success = True
                print "  mapping volume %s to instance %s at device %s" % (unattachedvol.id, iid, src)
                unattachedvol.attach(iid, src)
+   if success:
+      print "success"
+   else:
+      print "not found"
 
 print vol
 unattachedvolumes()
