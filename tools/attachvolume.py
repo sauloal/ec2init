@@ -20,10 +20,20 @@ parser.add_argument('-d', '--destination', metavar='DESTINATION', type=str, narg
 parser.add_argument('-r', '--region'     , metavar='REGION'     , type=str, nargs=1, help='region [eu-west][EC2_REGION]')
 
 
-if svo       is None: sys.exit(0)
-if src       is None: sys.exit(0)
-if iid       is None: sys.exit(0)
-if envregion is None: sys.exit(0)
+print "volume %s src %s instance id %s region %s" % (svo, src, iid, envregion)
+
+if svo       is None: 
+	print "no volume defined"
+	sys.exit(0)
+if src       is None:
+	print "no src defined" 
+	sys.exit(0)
+if iid       is None: 
+	print "no instance id"
+	sys.exit(0)
+if envregion is None: 
+	print "no region"
+	sys.exit(0)
 
 
 #desiredregion = 'eu-west'
