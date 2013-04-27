@@ -24,16 +24,23 @@ print "volume %s src %s instance id %s region %s" % (svo, src, iid, envregion)
 
 if svo       is None: 
 	print "no volume defined"
-	sys.exit(0)
+	parser.print_help()
+	sys.exit(1)
+
 if src       is None:
 	print "no src defined" 
-	sys.exit(0)
+	parser.print_help()
+	sys.exit(1)
+
 if iid       is None: 
 	print "no instance id"
-	sys.exit(0)
+	parser.print_help()
+	sys.exit(1)
+
 if envregion is None: 
 	print "no region"
-	sys.exit(0)
+	parser.print_help()
+	sys.exit(1)
 
 
 #desiredregion = 'eu-west'
