@@ -22,11 +22,11 @@ yum install -y git
 sleep 2
 
 cd ~
-if [[ ! -f "ec2init" ]]; do
+if [[ ! -d "ec2init" ]]; then
 	git clone git://github.com/sauloal/ec2init.git
 else
 	echo "ec2init already downloaded"
-done
+fi
 
 
 sleep 2
