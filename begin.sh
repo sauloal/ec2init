@@ -36,10 +36,10 @@ curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myi
 
 
 
-source ~ec2-user/init.install.sh
+source ~/ec2init/init.install.sh
 
 
-python ~ec2-user/tools/attachvolume.py
+python ~/ec2init/tools/attachvolume.py
 sleep 10
 
 
