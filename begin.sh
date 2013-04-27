@@ -5,19 +5,19 @@ cd $BASE
 echo "IN BASE $PWD"
 
 # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
-EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname`
+EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname 2>/dev/null`
 
-EC2_INST_ID=`curl http://169.254.169.254/latest/meta-data/instance-id`
+EC2_INST_ID=`curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null`
 
-EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname`
-EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname 2>/dev/null`
+EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4 2>/dev/null`
 
-EC2_PUB_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/public-hostname`
-EC2_PUB_IPV4=`curl http://169.254.169.254/latest/meta-data/public-ipv4`
+EC2_PUB_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/public-hostname 2>/dev/null`
+EC2_PUB_IPV4=`curl http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null`
 
-EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type`
+EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type 2>/dev/null`
 # http://stackoverflow.com/questions/4249488/find-region-from-within-ec2-instance
-EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
+EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}' 2>/dev/null`
 
 
 curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4
