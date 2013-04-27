@@ -31,13 +31,18 @@ curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myi
 # IF EXISTS, ATTACH VOL
 #   http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ApiReference-cmd-AttachVolume.html
 #   ec2-attach-volume -d /dev/sdh -i i-11111111 vol-0000000
+#export AWS_ACCESS_KEY=`cat ~/.boto | grep aws_access_key        | gawk '{print $3}'`
+#export AWS_SECRET_ACCESS_KEY=`cat ~/.boto | grep aws_secret_access_key | gawk '{print $3}'`
 
 
 
 source ~ec2-user/init.install.sh
 
-export AWS_ACCESS_KEY=`cat ~/.boto | grep aws_access_key        | gawk '{print $3}'`
-export AWS_SECRET_ACCESS_KEY=`cat ~/.boto | grep aws_secret_access_key | gawk '{print $3}'`
+
+python ~ec2-user/tools/attachvolume.py
+sleep 10
+
+
 
 if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
 	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
@@ -48,6 +53,8 @@ if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
 else
 	EC2_EXTERNAL_PRESENT=""
 fi
+
+
 
 echo "HOSTNAME          $EC2_HOSTNAME"
 echo "INSTANCE ID       $EC2_INST_ID"
@@ -78,6 +85,9 @@ echo "export EC2_EXTERNAL_SRC=$EC2_EXTERNAL_SRC"         >> ~/.ec2
 echo "export EC2_EXTERNAL_DST=$EC2_EXTERNAL_DST"         >> ~/.ec2
 echo "export EC2_EXTERNAL_PRESENT=$EC2_EXTERNAL_PRESENT" >> ~/.ec2
 
+
+
+
 if [[ -z `grep /.ec2 /etc/profile.d/saulo.sh` ]]; then 
 	echo 'modifying bashrc'
 	echo "source ~/.ec2"          >> /etc/profile.d/saulo.sh
@@ -91,6 +101,8 @@ fi
 cp ~/.ec2    ~ec2-user/
 cp ~/.boto   ~ec2-user/
 cp ~/.bashrc ~ec2-user/
+
+
 
 for file in $BASE/init.sh.*.sh; do
 	if [[ ! -e "${file}.skip" ]]; then

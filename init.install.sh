@@ -33,25 +33,35 @@ wget -O jre.rpm 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=76850'
 rpm -ivf jre.rpm
 rm -f jre.rpm
 
-wget -O ec2-api-tools.zip 'http://www.amazon.com/gp/redirect.html/ref=aws_rc_ec2tools?location=http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip&token=A80325AA4DAB186C80828ED5138633E3F49160D9'
-unzip ec2-api-tools.zip
-rm -f ec2-api-tools.zip
+#wget -O ec2-api-tools.zip 'http://www.amazon.com/gp/redirect.html/ref=aws_rc_ec2tools?location=http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip&token=A80325AA4DAB186C80828ED5138633E3F49160D9'
+#unzip ec2-api-tools.zip
+#rm -f ec2-api-tools.zip
 
-mkdir /usr/ec2
-cd ec2-api-tool-*
-mv bin lib /usr/ec2/
+#mkdir /usr/ec2
+#cd ec2-api-tool-*
+#mv bin lib /usr/ec2/
 
-cd /usr/ec2/bin
-rm -f *.cmd
-for file in *; do
-	if [[ ! -f "/usr/bin/$file" ]]; then
-		unlink /usr/bin/$file
-	fi
-	ln -s $PWD/$file /usr/bin/$file
-done
+#cd /usr/ec2/bin
+#rm -f *.cmd
+#for file in *; do
+#	if [[ ! -f "/usr/bin/$file" ]]; then
+#		unlink /usr/bin/$file
+#	fi
+#	ln -s $PWD/$file /usr/bin/$file
+#done
 
-echo 'export EC2_HOME=/usr/ec2/'         >> /etc/profile.d/saulo.sh
+#cd -
+
+#echo 'export EC2_HOME=/usr/ec2/'         >> /etc/profile.d/saulo.sh
 echo 'export JAVA_HOME=/usr/java/latest' >> /etc/profile.d/saulo.sh
 
-cd -
 
+yum clean all
+
+
+#boto
+easy_install boto
+# gives boto-rsync
+easy_install boto_rsync
+# gives ses-send-email and s3-geturl, among others
+easy_install boto_utils
