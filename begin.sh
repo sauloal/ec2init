@@ -7,6 +7,8 @@ echo "IN BASE $PWD"
 # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
 EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname`
 
+EC2_INST_ID=`curl http://169.254.169.254/latest/meta-data/instance-id`
+
 EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname`
 EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
 
@@ -30,6 +32,13 @@ curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myi
 #   http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ApiReference-cmd-AttachVolume.html
 #   ec2-attach-volume -d /dev/sdh -i i-11111111 vol-0000000
 
+
+
+source ~ec2-user/init.install.sh
+
+export AWS_ACCESS_KEY=`cat ~/.boto | grep aws_access_key        | gawk '{print $3}'`
+export AWS_SECRET_ACCESS_KEY=`cat ~/.boto | grep aws_secret_access_key | gawk '{print $3}'`
+
 if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
 	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
 		EC2_EXTERNAL_PRESENT=""
@@ -41,6 +50,7 @@ else
 fi
 
 echo "HOSTNAME          $EC2_HOSTNAME"
+echo "INSTANCE ID       $EC2_INST_ID"
 echo "PRIV HOSTNAME     $EC2_PRIV_HOSTNAME"
 echo "PRIV IPV4         $EC2_PRIV_IPV4"
 echo "PUB  IPV4         $EC2_PUB_IPV4"
@@ -55,6 +65,7 @@ echo "EC2  EXTERNAL PRE $EC2_EXTERNAL_PRESENT"
 
 
 echo "export EC2_HOSTNAME=$EC2_HOSTNAME"                  > ~/.ec2
+echo "export EC2_INST_ID=$EC2_INST_ID"                   >> ~/.ec2
 echo "export EC2_PRIV_HOSTNAME=$EC2_PRIV_HOSTNAME"       >> ~/.ec2
 echo "export EC2_PRIV_IPV4=$EC2_PRIV_IPV4"               >> ~/.ec2
 echo "export EC2_PUB_IPV4=$EC2_PUB_IPV4"                 >> ~/.ec2
