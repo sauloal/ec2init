@@ -67,14 +67,14 @@ echo "export EC2_EXTERNAL_SRC=$EC2_EXTERNAL_SRC"         >> ~/.ec2
 echo "export EC2_EXTERNAL_DST=$EC2_EXTERNAL_DST"         >> ~/.ec2
 echo "export EC2_EXTERNAL_PRESENT=$EC2_EXTERNAL_PRESENT" >> ~/.ec2
 
-if [[ -z `grep /.ec2  ~/.bashrc` ]]; then 
+if [[ -z `grep /.ec2 /etc/profile.d/saulo.sh` ]]; then 
 	echo 'modifying bashrc'
-	echo "source ~/.ec2"          >> ~/.bashrc
-	echo "PATH=$PATH:$BASE/tools" >> ~/.bashrc
+	echo "source ~/.ec2"          >> /etc/profile.d/saulo.sh
+	echo "PATH=$PATH:$BASE/tools" >> /etc/profile.d/saulo.sh
 
 else
 	echo 'bashrc already modified'
-	grep /.ec2  ~/.bashrc
+	grep /.ec2 /etc/profile.d/saulo.sh
 fi
 
 cp ~/.ec2    ~ec2-user/
