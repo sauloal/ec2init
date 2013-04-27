@@ -35,9 +35,12 @@ curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myi
 #export AWS_SECRET_ACCESS_KEY=`cat ~/.boto | grep aws_secret_access_key | gawk '{print $3}'`
 
 
-
-source ~/ec2init/init.install.sh
-
+if [[ ! -f "~/ec2init/init.install.sh.skip" ]]; then
+	source ~/ec2init/init.install.sh
+	touch ~/ec2init/init.install.sh.skip
+else
+	echo "yum libraries already installed"
+fi
 
 python ~/ec2init/tools/attachvolume.py
 sleep 10
