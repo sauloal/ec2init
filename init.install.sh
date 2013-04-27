@@ -20,8 +20,11 @@ yum install -y binutils coreutils moreutils make automake gcc gcc-c++ kernel-dev
 yum install -y python-devel
 yum install -y unzip
 
-rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-18.noarch.rpm
-rpm -ivh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-18.noarch.rpm
+wget -O /tmp/fusion_free.rpm  http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-18.noarch.rpm
+wget -O /tmp/fusion_nfree.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-18.noarch.rpm
+
+yum install -y /tmp/fusion_free.rpm
+yum install -y /tmp/fusion_nfree.rpm
 
 yum clean all
 
@@ -29,9 +32,10 @@ yum clean all
 #git clone https://github.com/bobsta63/zpanelx.git zpanelx
 
 #yum remove java java-devel
-wget -O jre.rpm 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=76850'
-rpm -ivf jre.rpm
-rm -f jre.rpm
+wget -O /tmp/jre.rpm 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=76850'
+#rpm -ivf jre.rpm
+#rm -f jre.rpm
+yum install -y /tmp/jre.rpm
 
 #wget -O ec2-api-tools.zip 'http://www.amazon.com/gp/redirect.html/ref=aws_rc_ec2tools?location=http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip&token=A80325AA4DAB186C80828ED5138633E3F49160D9'
 #unzip ec2-api-tools.zip

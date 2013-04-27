@@ -5,8 +5,8 @@
 #todo: setup folders
 set -xeu
 
-rpm -Uvh http://dl.ajaxplorer.info/repos/el6/ajaxplorer-stable/ajaxplorer-release-4-1.noarch.rpm
-
+wget -O /tmp/ajax.rpm http://dl.ajaxplorer.info/repos/el6/ajaxplorer-stable/ajaxplorer-release-4-1.noarch.rpm
+yum install -y /tmp/ajax.rpm
 
 yum update -y
 yum install -y ajaxplorer
