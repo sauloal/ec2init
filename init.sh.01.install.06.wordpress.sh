@@ -21,5 +21,8 @@
 #mysql -h localhost -u root -p < mods/wp-config.php.sql
 #/var/lib/mysql
 
+mount --bind /mnt/external/mysql     /var/lib/mysql 
+mount --bind /mnt/external/wordpress /usr/share/wordpress
+
 # REPLACE ALL VARIABLES
-cp  -f --no-preserve=all mods/wp-config.php.new /etc/wordpress/wp-config.php
+#cp  -f --no-preserve=all mods/wp-config.php.new /etc/wordpress/wp-config.php
