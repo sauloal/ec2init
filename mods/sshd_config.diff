@@ -1,51 +1,37 @@
---- /root/ec2init/mods/sshd_config.orig	2013-04-15 20:46:52.932991987 -0400
-+++ /root/ec2init/mods/sshd_config.new	2013-04-15 21:06:58.462074000 -0400
-@@ -42,7 +42,7 @@
- # Authentication:
- 
- #LoginGraceTime 2m
--#PermitRootLogin yes
-+PermitRootLogin no
- #StrictModes yes
- #MaxAuthTries 6
- #MaxSessions 10
-@@ -109,19 +109,19 @@
- 
- #AllowAgentForwarding yes
- #AllowTcpForwarding yes
--#GatewayPorts no
--#X11Forwarding no
-+GatewayPorts no
-+##X11Forwarding no
- X11Forwarding yes
- #X11DisplayOffset 10
- #X11UseLocalhost yes
- #PrintMotd yes
- #PrintLastLog yes
--#TCPKeepAlive yes
-+TCPKeepAlive yes
- #UseLogin no
- UsePrivilegeSeparation sandbox		# Default for new installations.
- #PermitUserEnvironment no
--#Compression delayed
--#ClientAliveInterval 0
-+Compression delayed
-+ClientAliveInterval 60
- #ClientAliveCountMax 3
- #ShowPatchLevel no
- #UseDNS yes
-@@ -130,6 +130,7 @@
- #PermitTunnel no
- #ChrootDirectory none
- #VersionAddendum none
-+Ciphers blowfish-cbc,arcfour,aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,cast128-cbc,aes192-cbc,aes256-cbc
- 
- # no default banner path
- #Banner none
-@@ -151,4 +152,4 @@
- #Match User anoncvs
- #	X11Forwarding no
- #	AllowTcpForwarding no
--#	ForceCommand cvs server
+45c45
+< #PermitRootLogin yes
+---
+> PermitRootLogin no
+112,114c112,114
+< #GatewayPorts no
+< #X11Forwarding no
+< X11Forwarding yes
+---
+> GatewayPorts no
+> ##X11Forwarding no
+> X11Forwarding no
+119c119
+< #TCPKeepAlive yes
+---
+> TCPKeepAlive yes
+123,124c123,124
+< #Compression delayed
+< #ClientAliveInterval 0
+---
+> Compression delayed
+> ClientAliveInterval 60
+132a133
+> Ciphers arcfour,blowfish-cbc,es128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,cast128-cbc,aes192-cbc,aes256-cbc
+154c155,163
+< #	ForceCommand cvs server
 \ No newline at end of file
-+#	ForceCommand cvs server
+---
+> #	ForceCommand cvs server
+> 
+> Match User guests
+> #       X11Forwarding no
+>         #AllowTcpForwarding no
+>         #ForceCommand internal-sftp
+>         #ChrootDirectory /mnt/external
+>         PermitOpen 127.0.0.1:10000 127.0.0.1:80 127.0.0.1:3260 127.0.0.1:135 127.0.0.1:111 127.0.0.1:2049 127.0.0.1:137 127.0.0.1:139 127.0.0.1:445 127.0.0.1:138 127.0.0.1:32803 127.0.0.1:32769 127.0.0.1:892 127.0.0.1:875 127.0.0.1:662 127.0.0.1:2020 127.0.0.1:4000 127.0.0.1:47137 127.0.0.1:44250 127.0.0.1:20048 127.0.0.1:860 127.0.0.1:443 127.0.0.1:8888
+> 
