@@ -24,7 +24,7 @@ chmod 400 /etc/passwd-s3fs
 
 
 BUCKET=saulo
-if [[ ! -d "$BASE/BUCKET" ]]; THEN
+if [[ ! -d "$BASE/BUCKET" ]]; then
 	mkdir -p $BASE/$BUCKET
 fi
 
