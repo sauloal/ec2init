@@ -4,10 +4,29 @@ set -e -x -u
 cd $BASE
 echo "IN BASE $PWD"
 
+
+
+ec2metadata --instance-id
+ec2metadata --instance-type
+ec2metadata --local-hostname
+ec2metadata --public-hostname
+ec2metadata --local-ipv4
+ec2metadata --public-ipv4
+ec2metadata --block-device-mapping
+ec2metadata --security-groups
+ec2metadata --mac
+ec2metadata --profile
+ec2metadata --instance-action
+ec2metadata --public-keys
+ec2metadata --user-data
+
+
+
+
 # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
 EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname 2>/dev/null`
 
-EC2_INST_ID=`curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null`
+EC2_INST_ID=`cat /var/lib/cloud/data/instance-id`
 
 EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname 2>/dev/null`
 EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4 2>/dev/null`
