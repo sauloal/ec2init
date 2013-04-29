@@ -17,10 +17,13 @@ fi
 
 ec2metadata --instance-id
 ec2metadata --instance-type
+
 ec2metadata --local-hostname
-ec2metadata --public-hostname
 ec2metadata --local-ipv4
+
+ec2metadata --public-hostname
 ec2metadata --public-ipv4
+
 ec2metadata --block-device-mapping
 ec2metadata --security-groups
 ec2metadata --mac
@@ -28,24 +31,20 @@ ec2metadata --profile
 ec2metadata --instance-action
 ec2metadata --public-keys
 ec2metadata --user-data
-
+ec2metadata --availability-zone
 
 
 
 # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
-EC2_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/hostname 2>/dev/null`
-
-EC2_INST_ID=`cat /var/lib/cloud/data/instance-id`
-
-EC2_PRIV_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/local-hostname 2>/dev/null`
-EC2_PRIV_IPV4=`curl http://169.254.169.254/latest/meta-data/local-ipv4 2>/dev/null`
-
-EC2_PUB_HOSTNAME=`curl http://169.254.169.254/latest/meta-data/public-hostname 2>/dev/null`
-EC2_PUB_IPV4=`curl http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null`
-
-EC2_TYPE=`curl http://169.254.169.254/latest/meta-data/instance-type 2>/dev/null`
 # http://stackoverflow.com/questions/4249488/find-region-from-within-ec2-instance
-EC2_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document 2>/dev/null | grep region | awk -F\" '{print $4}'`
+EC2_HOSTNAME=`     ec2metadata --public-hostname`
+EC2_INST_ID=`      ec2metadata --instance-id`
+EC2_PRIV_HOSTNAME=`ec2metadata --local-hostname`
+EC2_PRIV_IPV4=`    ec2metadata --local-ipv4`
+EC2_PUB_HOSTNAME=` ec2metadata --public-hostname`
+EC2_PUB_IPV4=`     ec2metadata --public-ipv4`
+EC2_TYPE=`         ec2metadata --instance-type`
+EC2_REGION=`       ec2metadata --availability-zone`
 
 
 curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4 2>/dev/null
@@ -110,8 +109,8 @@ echo "HOSTNAME                 $EC2_HOSTNAME"
 echo "INSTANCE ID              $EC2_INST_ID"
 echo "PRIV HOSTNAME            $EC2_PRIV_HOSTNAME"
 echo "PRIV IPV4                $EC2_PRIV_IPV4"
-echo "PUB  IPV4                $EC2_PUB_IPV4"
 echo "PUB  HOSTNAME            $EC2_PUB_HOSTNAME"
+echo "PUB  IPV4                $EC2_PUB_IPV4"
 echo "EC2  TYPE                $EC2_TYPE"
 echo "EC2  ARN                 $EC2_ARN"
 echo "EC2  REGION              $EC2_REGION"
@@ -129,26 +128,27 @@ echo "EC2  EXTERNAL DATA   PRE $EC2_EXTERNAL_DATA_PRESENT"
 
 
 
-echo "export EC2_HOSTNAME=$EC2_HOSTNAME"                  > ~/.ec2
-echo "export EC2_INST_ID=$EC2_INST_ID"                   >> ~/.ec2
-echo "export EC2_PRIV_HOSTNAME=$EC2_PRIV_HOSTNAME"       >> ~/.ec2
-echo "export EC2_PRIV_IPV4=$EC2_PRIV_IPV4"               >> ~/.ec2
-echo "export EC2_PUB_IPV4=$EC2_PUB_IPV4"                 >> ~/.ec2
-echo "export EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME"         >> ~/.ec2
-echo "export EC2_TYPE=$EC2_TYPE"                         >> ~/.ec2
-echo "export EC2_ARN=$EC2_ARN"                           >> ~/.ec2
-echo "export EC2_REGION=$EC2_REGION"                     >> ~/.ec2
+echo "export EC2_HOSTNAME=$EC2_HOSTNAME"                                > ~/.ec2
+echo "export EC2_INST_ID=$EC2_INST_ID"                                 >> ~/.ec2
+echo "export EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME"                       >> ~/.ec2
+echo "export EC2_PUB_IPV4=$EC2_PUB_IPV4"                               >> ~/.ec2
+echo "export EC2_PRIV_HOSTNAME=$EC2_PRIV_HOSTNAME"                     >> ~/.ec2
+echo "export EC2_PRIV_IPV4=$EC2_PRIV_IPV4"                             >> ~/.ec2
+echo "export EC2_TYPE=$EC2_TYPE"                                       >> ~/.ec2
+echo "export EC2_ARN=$EC2_ARN"                                         >> ~/.ec2
+echo "export EC2_REGION=$EC2_REGION"                                   >> ~/.ec2
 
 echo "export EC2_EXTERNAL_CONFIG_VOL=$EC2_EXTERNAL_CONFIG_VOL"         >> ~/.ec2
 echo "export EC2_EXTERNAL_CONFIG_SRC=$EC2_EXTERNAL_CONFIG_SRC"         >> ~/.ec2
 echo "export EC2_EXTERNAL_CONFIG_DST=$EC2_EXTERNAL_CONFIG_DST"         >> ~/.ec2
 echo "export EC2_EXTERNAL_CONFIG_PRESENT=$EC2_EXTERNAL_CONFIG_PRESENT" >> ~/.ec2
 
-echo "export EC2_EXTERNAL_DATA_VOL=$EC2_EXTERNAL_DATA_VOL"         >> ~/.ec2
-echo "export EC2_EXTERNAL_DATA_SRC=$EC2_EXTERNAL_DATA_SRC"         >> ~/.ec2
-echo "export EC2_EXTERNAL_DATA_DST=$EC2_EXTERNAL_DATA_DST"         >> ~/.ec2
-echo "export EC2_EXTERNAL_DATA_PRESENT=$EC2_EXTERNAL_DATA_PRESENT" >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_VOL=$EC2_EXTERNAL_DATA_VOL"             >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_SRC=$EC2_EXTERNAL_DATA_SRC"             >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_DST=$EC2_EXTERNAL_DATA_DST"             >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_PRESENT=$EC2_EXTERNAL_DATA_PRESENT"     >> ~/.ec2
 
+echo "export DYN_HOST=$DYN_HOST"                                       >> ~/.ec2
 
 
 
