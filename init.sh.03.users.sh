@@ -1,1 +1,1 @@
-useradd -M -s /sbin/nologin guests
+useradd -s /sbin/nologin guests

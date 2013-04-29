@@ -21,7 +21,7 @@
 > Compression delayed
 > ClientAliveInterval 60
 132a133
-> Ciphers arcfour,blowfish-cbc,es128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,cast128-cbc,aes192-cbc,aes256-cbc
+> Ciphers arcfour,blowfish-cbc,aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,cast128-cbc,aes192-cbc,aes256-cbc
 154c155,163
 < #	ForceCommand cvs server
 \ No newline at end of file
