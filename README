@@ -6,8 +6,8 @@ When starting ec2 add the following user data:
 #!/bin/bash
 set -xeu
 
-EC2_ACCESS_KEY=<your access key>
-EC2_SECRET_ACCESS_KEY=<your secret key>
+export EC2_ACCESS_KEY=<your access key>
+export EC2_SECRET_ACCESS_KEY=<your secret key>
 
 export EC2_ARN=<arn>
 
