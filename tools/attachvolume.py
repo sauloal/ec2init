@@ -20,27 +20,35 @@ parser.add_argument('-c', '--config-file', dest='config'     , default=None, act
 
 args = parser.parse_args()
 
+
 def main():
 	setup = loadconfig()
 
 	for vol in setup:
-		checksetup(setup[vol])
+		print "checking", vol
+		setup[vol] = checksetup(setup[vol])
 
 	for vol in setup:
-		attachosvol(setup[vol])
+		print "attaching", vol
+		if setup[vol] is None: continue
+		attachvol(setup[vol])
 
 	for vol in setup:
+		print "mounting", vol
+		if setup[vol] is None: continue
 		mountvol(setup[vol])
 
 
-def attachosvol(vars):
+def attachvol(vars):
 	print "mapping volume %s to instance %s at device %s" % (vars['volume'], vars['instance'], vars['device'])
 
-	#vars['VOL'].attach(vars['instance'], vars['device'])
+	vars['VOL'].attach(vars['instance'], vars['device'])
 
+	print "mapped. waiting"
 	time.sleep(10)
+	print "checking mapping"
 
-	if os.path.exits(vars['device']):
+	if os.path.exists(vars['device']):
 		print "  success"
 	else:
 		print "  vailed"
@@ -48,18 +56,22 @@ def attachosvol(vars):
 
 
 def mountvol(vars):
-	mounted = subprocess.checkoutput(['mount'])
+	mounted = subprocess.check_output(['mount'])
 
-	print mounted
+	if vars['mount'] in mounted:
+		print "already mounted"
+		return
+	else:
+		print "not mounted. mounting"
 
-	if not os.path.exits(vars['mount']:
+	if not os.path.exists(vars['mount']):
 		os.makedirs(vars['mount'])
 
 	res1 = subprocess.call( [ 'mount', vars['device'], vars['mount'] ] )
 
 	if res1 != 0:
 		print "  failed"
-		#sys.exit(1)
+		sys.exit(1)
 	else:
 		print "  success"
 
@@ -85,12 +97,19 @@ def loadconfig():
 				if len(line) == 0: continue
 				if line[0] == "#": continue
 				cols = line.split("\t")
+
+				print cols
 				##VOLUME NAME    DEVICE NAME     MOUNT POINT     REGION  INSTANCE
 				volume   = cols[0]
 				device   = cols[1]
 				mount    = cols[2]
-				region   = cols[3]
-				instance = cols[4]
+				region   = ""
+				instance = ""
+
+				if len(cols)> 3:
+					region   = cols[3]
+				if len(cols)> 4:
+					instance = cols[4]
 
 				if len(volume  ) == 0: volume   = None
 				if len(device  ) == 0: device   = None
@@ -182,9 +201,9 @@ def loadvars():
 	if svo       is None: 
 		svo       = os.environ.get('EC2_EXTERNAL_VOL')
 
-	src = args.device
-	if src       is None:
-		src       = os.environ.get('EC2_EXTERNAL_SRC')
+	dev = args.device
+	if dev       is None:
+		dev       = os.environ.get('EC2_EXTERNAL_SRC')
 
 	mnt = args.mount
 	if mnt       is None:
@@ -200,8 +219,8 @@ def loadvars():
 
 	return {
 		'volume'  : svo,
-		'device'  : src,
-		'mount'   : dst,
+		'device'  : dev,
+		'mount'   : mnt,
 		'instance': iid,
 		'region'  : envregion
 	}
@@ -217,30 +236,42 @@ def checksetup(vars):
 	#	}
 
 	print "volume %s src %s instance id %s region %s" % (vars['volume'], vars['device'], vars['instance'], vars['region'])
+	print vars
 
-	region = gerregion( vars['region'] )
+	region = getregion( vars['region'] )
 
 
 	vols   = getavailablevolumes(region)
-	if vars['volume'] not in vols:
+	if vars['volume'] in vols:
+		print "volume %s found" % vars['volume']
+		if vols[vars['volume']] is None:
+			print "volume %s is already attached" % vars['volume']
+			return None
+		else:
+			print "volume %s not attached. proceeding" % vars['volume']
+
+	else:
 		print "volume %s not found" % vars['volume']
 		sys.exit(1)
-	vars['VOL'] = vols[vars['volume']]
+
+	vars['VOL'] = vols[ vars['volume'] ]
 
 	insts  = getavailableinstances(region)
 	if vars['instance'] not in insts:
-		print "instance %s not found" %s vars['instance']
+		print "instance %s not found" % vars['instance']
 		sys.exit(1)
+
+	return vars
 	
 
-def gerregion(desiredregion):
+def getregion(desiredregion):
 	#desiredregion = 'eu-west'
-
+	print "checking regions %s" % desiredregion
 	region         = None
 
 	regions = boto.ec2.regions()
 	for regioninfo in regions:
-	    #print regioninfo.name,
+	    #print regioninfo.name
 	    if regioninfo.name == desiredregion:
         	 region = regioninfo
 	         print "%s *" % regioninfo.name
@@ -249,6 +280,8 @@ def gerregion(desiredregion):
 	if region is None:
 	    print "not able to find to region %s" % desiredregion
 	    sys.exit(1)
+
+	return region
 
 
 def getavailableinstances(region):
@@ -267,10 +300,10 @@ def getavailableinstances(region):
 
 def getavailablevolumes(region):
 	ec2       = boto.connect_ec2( region=region )
-	#res       = ec2.get_all_instances()
-	#instances = [i for r in res for i in r.instances]
 	vol       = ec2.get_all_volumes()
 
+	print region
+	print vol
 	vols      = {}
 	# Get a list of unattached volumes
 	for unattachedvol in vol:
@@ -279,6 +312,9 @@ def getavailablevolumes(region):
 	       	if state == None:
         		print unattachedvol.id, state
 			vols[ unattachedvol.id ] = unattachedvol
+		else:
+			vols[ unattachedvol.id ] = None
+
 	return vols
 
 
