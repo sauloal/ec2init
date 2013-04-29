@@ -23,8 +23,12 @@ chmod 400 /etc/passwd-s3fs
 #./s3fs saulo saulo -o use_rrs=1 -o allow_other -o passwd_file=./confi
 
 
-BUCKET=saulo
+BUCKETS=`s3cmd ls | gawk '{print $3}' | sed 's/s3\:\/\///'`
 
+for BUCKET in $BUCKETS; do
+	#BUCKET=saulo
+
+	echo "adding bucket $BUCKET"
 
 	BUCKETPATH=$BASE/$BUCKET
 
@@ -48,7 +52,7 @@ BUCKET=saulo
 	else
 		echo "$BUCKETPATH already mounted"
 	fi
-
+done
 
 
 cd ~/ec2init
