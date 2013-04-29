@@ -19,7 +19,7 @@ yum remove  -y audit
 yum install -y binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
 yum install -y python-devel
 yum install -y unzip
-
+yum install -y fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
 
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
