@@ -17,7 +17,8 @@ python setup.py install
 
 cd ~/ec2init
 
-cp ec2init/mods/s3cfg.new ~/.s3cfg
+cp mods/s3cfg.new ~/.s3cfg
+chmod 400 ~/.s3cfg
 
-sed -i "s/<access>/$EC2_ACCESS_KEY/" ~/.s3cfg
+sed -i "s/<access>/$EC2_ACCESS_KEY/"        ~/.s3cfg
 sed -i "s/<secret>/$EC2_SECRET_ACCESS_KEY/" ~/.s3cfg
