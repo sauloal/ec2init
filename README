@@ -11,11 +11,11 @@ EC2_SECRET_ACCESS_KEY=<your secret key>
 
 export EC2_ARN=<arn>
 
-export EC2_EXTERNAL_CONFIG_VOL=vol-08316925
+export EC2_EXTERNAL_CONFIG_VOL=<small config (sql, owncloud, etc) volume>
 export EC2_EXTERNAL_CONFIG_SRC=/dev/xvdf
 export EC2_EXTERNAL_CONFIG_DST=/mnt/config
 
-export EC2_EXTERNAL_DATA_VOL=vol-2bd8a406
+export EC2_EXTERNAL_DATA_VOL=<big data volume>
 export EC2_EXTERNAL_DATA_SRC=/dev/xvdg
 export EC2_EXTERNAL_DATA_DST=/mnt/data
 
