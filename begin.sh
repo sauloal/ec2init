@@ -43,15 +43,13 @@ else
 	echo "yum libraries already installed"
 fi
 
-
-
-
-echo "ATTACHING VOLUME"
-echo "ATTACHING VOLUME $EC2_EXTERNAL_VOL TO INSTANCE $EC2_INST_ID TO DEVICE $EC2_EXTERNAL_SRC"
-python ~/ec2init/tools/attachvolume.py -i $EC2_INST_ID -v $EC2_EXTERNAL_VOL -d $EC2_EXTERNAL_SRC -r $EC2_REGION
-echo "VOLUME ATTACHED"
-sleep 10
-
+if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
+	echo "disks not attached yet. attaching"
+	source ~/ec2init/init.attach.sh
+	touch  ~/ec2init/init.attach.sh.skip
+else
+	echo "disks already attached"
+fi
 
 
 
