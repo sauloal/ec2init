@@ -46,8 +46,6 @@ EC2_PUB_IPV4=`     ec2metadata --public-ipv4`
 EC2_TYPE=`         ec2metadata --instance-type`
 EC2_REGION=`       ec2metadata --availability-zone`
 
-EC2_ACCESS_KEY=<your access key>
-EC2_SECRET_ACCESS_KEY=<your secret key>
 
 echo "[Credentials]"                                   > ~/.boto
 echo "aws_access_key_id = $EC2_ACCESS_KEY"            >> ~/.boto
