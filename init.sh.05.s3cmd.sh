@@ -5,9 +5,13 @@ cd /tmp
 
 #./s3cmd ls | gawk '{print $3}' | xargs -I{} bash -c 'echo "mkdir /mnt/external/s3/`basename {}`; ./s3cmd --rexclude \"\/\$\" --skip-existing sync {} /mnt/external/s3/"`basename {}`"/"' > cmds
 
-git clone https://github.com/s3tools/s3cmd
+if [[ ! -d "s3cmd" ]]; then
+	git clone https://github.com/s3tools/s3cmd
+fi
 
 cd s3cmd
+
+git pull
 
 python setup.py install
 
