@@ -5,6 +5,15 @@ cd $BASE
 echo "IN BASE $PWD"
 
 
+if [[ ! -f "/root/ec2init/init.install.sh.skip" ]]; then
+	echo "yum libraries not installed. installing"
+	source ~/ec2init/init.install.sh
+	touch  ~/ec2init/init.install.sh.skip
+else
+	echo "yum libraries already installed"
+fi
+
+
 
 ec2metadata --instance-id
 ec2metadata --instance-type
@@ -54,13 +63,9 @@ curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myi
 #export AWS_SECRET_ACCESS_KEY=`cat ~/.boto | grep aws_secret_access_key | gawk '{print $3}'`
 
 
-if [[ ! -f "/root/ec2init/init.install.sh.skip" ]]; then
-	echo "yum libraries not installed. installing"
-	source ~/ec2init/init.install.sh
-	touch  ~/ec2init/init.install.sh.skip
-else
-	echo "yum libraries already installed"
-fi
+
+
+
 
 if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
 	echo "disks not attached yet. attaching"
@@ -69,6 +74,8 @@ if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
 else
 	echo "disks already attached"
 fi
+
+
 
 
 
@@ -93,6 +100,9 @@ if [[ ! -z "$EC2_EXTERNAL_DATA_SRC" ]]; then
 else
 	EC2_EXTERNAL_DATA_PRESENT=""
 fi
+
+
+
 
 
 
