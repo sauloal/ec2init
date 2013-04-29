@@ -14,7 +14,6 @@ fi
 
 yum install -y perl make openssl perl-Authen-PAM
 
-mount --bind /mnt/external/owncloud /var/www/html/owncloud/
 
 
 #WEBMIN - CHANGE PASSWORD ASAP
