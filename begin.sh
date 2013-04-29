@@ -55,31 +55,49 @@ fi
 
 
 
-if [[ ! -z "$EC2_EXTERNAL_SRC" ]]; then
-	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_SRC` ]]; then
-		EC2_EXTERNAL_PRESENT=""
+if [[ ! -z "$EC2_EXTERNAL_CONFIG_SRC" ]]; then
+	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_CONFIG_SRC` ]]; then
+		EC2_EXTERNAL_CONFIG_PRESENT=""
 	else
-		EC2_EXTERNAL_PRESENT="OK"
+		EC2_EXTERNAL_CONFIG_PRESENT="OK"
 	fi
 else
-	EC2_EXTERNAL_PRESENT=""
+	EC2_EXTERNAL_CONFIG_PRESENT=""
+fi
+
+if [[ ! -z "$EC2_EXTERNAL_DATA_SRC" ]]; then
+	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_DATA_SRC` ]]; then
+		EC2_EXTERNAL_DATA_PRESENT=""
+	else
+		EC2_EXTERNAL_DATA_PRESENT="OK"
+	fi
+else
+	EC2_EXTERNAL_DATA_PRESENT=""
 fi
 
 
 
-echo "HOSTNAME          $EC2_HOSTNAME"
-echo "INSTANCE ID       $EC2_INST_ID"
-echo "PRIV HOSTNAME     $EC2_PRIV_HOSTNAME"
-echo "PRIV IPV4         $EC2_PRIV_IPV4"
-echo "PUB  IPV4         $EC2_PUB_IPV4"
-echo "PUB  HOSTNAME     $EC2_PUB_HOSTNAME"
-echo "EC2  TYPE         $EC2_TYPE"
-echo "EC2  ARN          $EC2_ARN"
-echo "EC2  REGION       $EC2_REGION"
-echo "EC2  EXTERNAL VOL $EC2_EXTERNAL_VOL"
-echo "EC2  EXTERNAL SRC $EC2_EXTERNAL_SRC"
-echo "EC2  EXTERNAL DST $EC2_EXTERNAL_DST"
-echo "EC2  EXTERNAL PRE $EC2_EXTERNAL_PRESENT"
+echo "HOSTNAME                 $EC2_HOSTNAME"
+echo "INSTANCE ID              $EC2_INST_ID"
+echo "PRIV HOSTNAME            $EC2_PRIV_HOSTNAME"
+echo "PRIV IPV4                $EC2_PRIV_IPV4"
+echo "PUB  IPV4                $EC2_PUB_IPV4"
+echo "PUB  HOSTNAME            $EC2_PUB_HOSTNAME"
+echo "EC2  TYPE                $EC2_TYPE"
+echo "EC2  ARN                 $EC2_ARN"
+echo "EC2  REGION              $EC2_REGION"
+
+echo "EC2  EXTERNAL CONFIG VOL $EC2_EXTERNAL_DATA_VOL"
+echo "EC2  EXTERNAL CONFIG SRC $EC2_EXTERNAL_DATA_SRC"
+echo "EC2  EXTERNAL CONFIG DST $EC2_EXTERNAL_DATA_DST"
+echo "EC2  EXTERNAL CONFIG PRE $EC2_EXTERNAL_DATA_PRESENT"
+
+echo "EC2  EXTERNAL DATA   VOL $EC2_EXTERNAL_DATA_VOL"
+echo "EC2  EXTERNAL DATA   SRC $EC2_EXTERNAL_DATA_SRC"
+echo "EC2  EXTERNAL DATA   DST $EC2_EXTERNAL_DATA_DST"
+echo "EC2  EXTERNAL DATA   PRE $EC2_EXTERNAL_DATA_PRESENT"
+
+
 
 
 echo "export EC2_HOSTNAME=$EC2_HOSTNAME"                  > ~/.ec2
@@ -91,10 +109,16 @@ echo "export EC2_PUB_HOSTNAME=$EC2_PUB_HOSTNAME"         >> ~/.ec2
 echo "export EC2_TYPE=$EC2_TYPE"                         >> ~/.ec2
 echo "export EC2_ARN=$EC2_ARN"                           >> ~/.ec2
 echo "export EC2_REGION=$EC2_REGION"                     >> ~/.ec2
-echo "export EC2_EXTERNAL_VOL=$EC2_EXTERNAL_VOL"         >> ~/.ec2
-echo "export EC2_EXTERNAL_SRC=$EC2_EXTERNAL_SRC"         >> ~/.ec2
-echo "export EC2_EXTERNAL_DST=$EC2_EXTERNAL_DST"         >> ~/.ec2
-echo "export EC2_EXTERNAL_PRESENT=$EC2_EXTERNAL_PRESENT" >> ~/.ec2
+
+echo "export EC2_EXTERNAL_CONFIG_VOL=$EC2_EXTERNAL_CONFIG_VOL"         >> ~/.ec2
+echo "export EC2_EXTERNAL_CONFIG_SRC=$EC2_EXTERNAL_CONFIG_SRC"         >> ~/.ec2
+echo "export EC2_EXTERNAL_CONFIG_DST=$EC2_EXTERNAL_CONFIG_DST"         >> ~/.ec2
+echo "export EC2_EXTERNAL_CONFIG_PRESENT=$EC2_EXTERNAL_CONFIG_PRESENT" >> ~/.ec2
+
+echo "export EC2_EXTERNAL_DATA_VOL=$EC2_EXTERNAL_DATA_VOL"         >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_SRC=$EC2_EXTERNAL_DATA_SRC"         >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_DST=$EC2_EXTERNAL_DATA_DST"         >> ~/.ec2
+echo "export EC2_EXTERNAL_DATA_PRESENT=$EC2_EXTERNAL_DATA_PRESENT" >> ~/.ec2
 
 
 

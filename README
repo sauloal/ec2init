@@ -10,9 +10,15 @@ echo "[Credentials]" > ~/.boto
 echo "aws_access_key_id = <your access key>" >> ~/.boto
 echo "aws_secret_access_key = <your secret key>" >> ~/.boto
 export EC2_ARN=arn:aws:sns:eu-west-1:422995397549:saulo_ec2
-export EC2_EXTERNAL_VOL=vol-2bd8a406
-export EC2_EXTERNAL_SRC=/dev/xvdf
-export EC2_EXTERNAL_DST=/mnt/external
+
+export EC2_EXTERNAL_CONFIG_VOL=vol-08316925
+export EC2_EXTERNAL_CONFIG_SRC=/dev/xvdf
+export EC2_EXTERNAL_CONFIG_DST=/mnt/config
+
+export EC2_EXTERNAL_DATA_VOL=vol-2bd8a406
+export EC2_EXTERNAL_DATA_SRC=/dev/xvdg
+export EC2_EXTERNAL_DATA_DST=/mnt/data
+
 export DYN_LOGIN=
 export DYN_PASS=
 export DYN_HOST=

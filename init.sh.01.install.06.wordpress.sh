@@ -31,20 +31,20 @@ systemctl restart mysqld.service
 #/var/lib/mysql
 
 
-if [[ ! -z "$EC2_EXTERNAL_PRESENT" ]]; then
+if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
 
   echo "mounting wordpress to external"
 
-  if [[ ! -e "$EC2_EXTERNAL_DST/wordpress" ]]; then
-    mkdir -p $EC2_EXTERNAL_DST/wordpress
-    chown -R apache:apache $EC2_EXTERNAL_DST/wordpress
-    chmod 0774 $EC2_EXTERNAL_DST/wordpress
+  if [[ ! -e "$EC2_EXTERNAL_CONFIG_DST/wordpress" ]]; then
+    mkdir -p $EC2_EXTERNAL_CONFIG_DST/wordpress
+    chown -R apache:apache $EC2_EXTERNAL_CONFIG_DST/wordpress
+    chmod 0774 $EC2_EXTERNAL_CONFIG_DST/wordpress
   fi
 
 
   if [[ -z `grep wordpress /etc/fstab` ]]; then
     echo "adding wordpress to fstab"
-    echo "$EC2_EXTERNAL_DST/wordpress   /usr/share/wordpress        bind    bind    0" >> /etc/fstab
+    echo "$EC2_EXTERNAL_CONFIG_DST/wordpress   /usr/share/wordpress        bind    bind    0" >> /etc/fstab
   else
     echo "wordpress already in fstab"
   fi
@@ -52,7 +52,7 @@ if [[ ! -z "$EC2_EXTERNAL_PRESENT" ]]; then
 
   if [[ -z `grep mysql /etc/fstab` ]]; then
     echo "adding mysql to fstab"
-    echo "$EC2_EXTERNAL_DST/mysql   /var/lib/mysql        bind    bind    0" >> /etc/fstab
+    echo "$EC2_EXTERNAL_CONFIG_DST/mysql   /var/lib/mysql        bind    bind    0" >> /etc/fstab
   else
     echo "mysql already in fstab"
   fi
@@ -60,7 +60,7 @@ if [[ ! -z "$EC2_EXTERNAL_PRESENT" ]]; then
 
   if [[ -z `mount | grep "wordpress"` ]]; then
     echo "mounting wordpress"
-    mount --bind $EC2_EXTERNAL_DST/wordpress /usr/share/wordpress
+    mount --bind $EC2_EXTERNAL_CONFIG_DST/wordpress /usr/share/wordpress
     mount --make-shared /usr/share/wordpress
   else
     echo "wordpress already mounted"
@@ -69,7 +69,7 @@ if [[ ! -z "$EC2_EXTERNAL_PRESENT" ]]; then
 
   if [[ -z `mount | grep "mysql"` ]]; then
     echo "mounting mysql"
-    mount --bind $EC2_EXTERNAL_DST/mysql /var/lib/mysql
+    mount --bind $EC2_EXTERNAL_CONFIG_DST/mysql /var/lib/mysql
     mount --make-shared /var/lib/mysql
   else
     echo "wordpress already mounted"
