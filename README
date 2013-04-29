@@ -9,7 +9,7 @@ set -xeu
 EC2_ACCESS_KEY=<your access key>
 EC2_SECRET_ACCESS_KEY=<your secret key>
 
-export EC2_ARN=arn:aws:sns:eu-west-1:422995397549:saulo_ec2
+export EC2_ARN=<arn>
 
 export EC2_EXTERNAL_CONFIG_VOL=vol-08316925
 export EC2_EXTERNAL_CONFIG_SRC=/dev/xvdf

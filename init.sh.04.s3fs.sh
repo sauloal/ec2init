@@ -1,5 +1,7 @@
 BASE=/mnt/s3
 
+# http://www.linode.com/wiki/index.php/S3fs
+
 cd /tmp
 
 #git clone git://github.com/tongwang/s3fs-c.git
@@ -30,3 +32,4 @@ echo "s3fs#$BUCKET $BASE/$BUCKET fuse url=http://s3.amazonaws.com,uid=1001,gid=1
 
 
 cd ~/ec2init
+
