@@ -30,8 +30,59 @@ systemctl restart mysqld.service
 #mysql -h localhost -u root -p < mods/wp-config.php.sql
 #/var/lib/mysql
 
-mount --bind /mnt/external/mysql     /var/lib/mysql 
-mount --bind /mnt/external/wordpress /usr/share/wordpress
+
+if [[ ! -z "$EC2_EXTERNAL_PRESENT" ]]; then
+
+  echo "mounting wordpress to external"
+
+  if [[ ! -e "$EC2_EXTERNAL_DST/wordpress" ]]; then
+    mkdir -p $EC2_EXTERNAL_DST/wordpress
+    chown -R apache:apache $EC2_EXTERNAL_DST/wordpress
+    chmod 0774 $EC2_EXTERNAL_DST/wordpress
+  fi
+
+
+  if [[ -z `grep wordpress /etc/fstab` ]]; then
+    echo "adding wordpress to fstab"
+    echo "$EC2_EXTERNAL_DST/wordpress   /usr/share/wordpress        bind    bind    0" >> /etc/fstab
+  else
+    echo "wordpress already in fstab"
+  fi
+
+
+  if [[ -z `grep mysql /etc/fstab` ]]; then
+    echo "adding mysql to fstab"
+    echo "$EC2_EXTERNAL_DST/mysql   /var/lib/mysql        bind    bind    0" >> /etc/fstab
+  else
+    echo "mysql already in fstab"
+  fi
+
+
+  if [[ -z `mount | grep "wordpress"` ]]; then
+    echo "mounting wordpress"
+    mount --bind $EC2_EXTERNAL_DST/wordpress /usr/share/wordpress
+    mount --make-shared /usr/share/wordpress
+  else
+    echo "wordpress already mounted"
+  fi
+
+
+  if [[ -z `mount | grep "mysql"` ]]; then
+    echo "mounting mysql"
+    mount --bind $EC2_EXTERNAL_DST/mysql /var/lib/mysql
+    mount --make-shared /var/lib/mysql
+  else
+    echo "wordpress already mounted"
+  fi
+
+
+  echo "mounting wordpress to external done"
+else
+  echo "external not present. skipping mounting wordpress to external"
+fi
+
+
+
 
 # REPLACE ALL VARIABLES
 #cp  -f --no-preserve=all mods/wp-config.php.new /etc/wordpress/wp-config.php
