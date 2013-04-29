@@ -24,11 +24,31 @@ chmod 400 /etc/passwd-s3fs
 
 
 BUCKET=saulo
-if [[ ! -d "$BASE/BUCKET" ]]; then
-	mkdir -p $BASE/$BUCKET
-fi
 
-echo "s3fs#$BUCKET $BASE/$BUCKET fuse url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_rrs=1 0 0
+
+	BUCKETPATH=$BASE/$BUCKET
+
+	if [[ ! -d "$BUCKETPATH" ]]; then
+		mkdir -p $BUCKETPATH
+	fi
+
+
+	if [[ -z `grep $BUCKETPATH /etc/fstab` ]]; then
+		echo "adding $BUCKETPATH to fstab"
+		echo "s3fs#$BUCKET $BUCKETPATH fuse url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_rrs=1 0 0" >> /etc/fstab
+		echo "added $BUCKETPATH to fstab"
+	else
+		echo "$BUCKETPATH already in fstab"
+	fi
+
+	if [[ -z `mount | grep "$BUCKETPATH"` ]]; then
+		echo "mounting $BUCKETPATH"
+		mount $BUCKETPATH
+		echo "mounted $BUCKETPATH"
+	else
+		echo "$BUCKETPATH already mounted"
+	fi
+
 
 
 cd ~/ec2init
