@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# chkconfig: 2345 80 30
+# description: BitNami Service
+# Rsyncd This shell script takes care of starting and stopping the rsync daemon
+# description: Rsync is an awesome replication tool.
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+[ -f /usr/bin/rsync ] || exit 0
+
+case "$1" in
+start)
+action "Starting rsyncd: " /usr/bin/rsync --daemon
+;;
+stop)
+action "Stopping rsyncd: " killall rsync
+;;
+*)
+echo "Usage: rsyncd {start|stop}"
+exit 1
+esac
+exit 0
