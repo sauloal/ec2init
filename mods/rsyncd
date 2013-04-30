@@ -1,7 +1,8 @@
 #!/bin/sh
 #
 # chkconfig: 2345 80 30
-# description: BitNami Service
+# description: Rsync
+#
 # Rsyncd This shell script takes care of starting and stopping the rsync daemon
 # description: Rsync is an awesome replication tool.
 
