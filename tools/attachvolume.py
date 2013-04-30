@@ -272,7 +272,7 @@ def getregion(desiredregion):
 	regions = boto.ec2.regions()
 	for regioninfo in regions:
 	    #print regioninfo.name
-	    if regioninfo.name == desiredregion:
+	    if desiredregion.startswith( regioninfo.name ):
         	 region = regioninfo
 	         print "%s *" % regioninfo.name
 	    #print
