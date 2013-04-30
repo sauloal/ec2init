@@ -36,10 +36,13 @@ for BUCKET in $BUCKETS; do
 		mkdir -p $BUCKETPATH
 	fi
 
+	chown guests:guests $BUCKETPATH
+	chmod 777 $BUCKETPATH
+
 
 	if [[ -z `grep $BUCKETPATH /etc/fstab` ]]; then
 		echo "adding $BUCKETPATH to fstab"
-		echo "s3fs#$BUCKET $BUCKETPATH fuse url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_rrs=1 0 0" >> /etc/fstab
+		echo "s3fs#$BUCKET $BUCKETPATH fuse netdev,url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_cache=/tmp,use_rrs=1,noatime, 0 0" >> /etc/fstab
 		echo "added $BUCKETPATH to fstab"
 	else
 		echo "$BUCKETPATH already in fstab"
@@ -49,9 +52,12 @@ for BUCKET in $BUCKETS; do
 		echo "mounting $BUCKETPATH"
 		mount $BUCKETPATH
 		echo "mounted $BUCKETPATH"
+		find $BUCKETPATH -type d -exec chmod 777 {} \;
+		find $BUCKETPATH -type f -exec chmod 666 {} \;
 	else
 		echo "$BUCKETPATH already mounted"
 	fi
+exit 0
 done
 
 
