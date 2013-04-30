@@ -52,11 +52,13 @@ for BUCKET in $BUCKETS; do
 
 	if [[ -z `grep $BUCKETPATH /etc/fstab` ]]; then
 		echo "adding $BUCKETPATH to fstab"
-		echo "s3fs#$BUCKET $BUCKETPATH fuse netdev,url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_cache=/tmp,use_rrs=1,noatime, 0 0" >> /etc/fstab
+		echo "s3fs#$BUCKET $BUCKETPATH fuse url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_cache=/tmp,use_rrs=1,noatime, 0 0" >> /etc/fstab
 		echo "added $BUCKETPATH to fstab"
 	else
 		echo "$BUCKETPATH already in fstab"
 	fi
+
+
 
 	if [[ -z `mount | grep "$BUCKETPATH"` ]]; then
 		echo "mounting $BUCKETPATH"
@@ -64,10 +66,10 @@ for BUCKET in $BUCKETS; do
 		echo "mounted $BUCKETPATH"
 
 		echo "chaning mode of folders"
-		find $BUCKETPATH -type d -exec echo {} \; chmod 777 {} \;
+		find $BUCKETPATH/ -mindepth 1 -type d -exec echo changing permission of folder {} \; -exec chmod 777 {} \;
 		
 		echo "changing mode of files"
-		find $BUCKETPATH -type f -exec echo {} \; -exec chmod 666 {} \;
+		find $BUCKETPATH/ -mindepth 1 -type f -exec echo changing permission of file {} \; -exec chmod 666 {} \;
 		echo "done"
 	else
 		echo "$BUCKETPATH already mounted"
