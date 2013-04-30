@@ -18,5 +18,8 @@ echo copying authorized keys
 cp mods/authorized_keys ~guests/.ssh
 
 echo changing permission of authorized keys
-chmod 400 ~guests/.ssh
-chmod 400 ~guests/.ssh/authorized_keys
+chmod 700 ~guests/.ssh
+chmod 600 ~guests/.ssh/authorized_keys
+chown guests:guests ~guests/.ssh
+chown guests:guests ~guests/.ssh/authorized_keys
+
