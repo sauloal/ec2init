@@ -2,6 +2,16 @@ BASE=/mnt/s3
 
 # http://www.linode.com/wiki/index.php/S3fs
 
+if [[ ! -d "$BASE" ]]; then
+	echo "CREATING BASE FOLDER $BASE"
+	mkdir $BASE
+else
+	echo "BASE FOLDER $BASE ALREADY EXISTS"
+fi
+
+chown guests:guests $BASE
+chmod 777 $BASE
+
 cd /tmp
 
 #git clone git://github.com/tongwang/s3fs-c.git
