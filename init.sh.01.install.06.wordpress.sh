@@ -21,15 +21,23 @@ systemctl restart mysqld.service
 
 
 # CHANGE PASSWORD PROGRAMATICALLY
-#mysqladmin -u root password
+mysqladmin -u root password $MYSQL_PASS
+#mysqladmin -u root -p'oldpassword' password newpass
 
 
-#/etc/wordpress/wp-config.php
-# GIVE PASSWORD PROGRAMATICALLY
-# REPLACE ALL VARIABLES
-#mysql -h localhost -u root -p < mods/wp-config.php.sql
+python mods/wp-config.php.py mods/wp-config.php.template > /etc/wordpress/wp-config.php
+python mods/wp-config.php.py mods/wp-config.php.sql      > /tmp/wp-config.sql
+
+
+mysql -h localhost -u root -p $MYSQL_PASS < /tmp/wp-config.sql
+
+
+rm /tmp/wp-config.sql
+
+
+
+
 #/var/lib/mysql
-
 
 if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
 
@@ -80,6 +88,9 @@ if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
 else
   echo "external not present. skipping mounting wordpress to external"
 fi
+
+
+
 
 
 

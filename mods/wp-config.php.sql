@@ -1,11 +1,11 @@
 ## CREATE NEW USER ##
-CREATE USER wordpress@localhost IDENTIFIED BY "<WP PASSWORD>";
+CREATE USER <WP USER NAME>@localhost IDENTIFIED BY "<WP PASSWORD>";
 
 ## CREATE NEW DATABASE ##
-CREATE DATABASE wordpress_blog;
+CREATE DATABASE <WP DB NAME>;
 
 ## GRANT needed permissions ##
-GRANT ALL ON wordpress_blog.* TO wordpress@localhost;
+GRANT ALL ON <WP DB NAME>.* TO <WP USER NAME>@localhost;
 
 ## FLUSH privileges ##
 FLUSH PRIVILEGES;

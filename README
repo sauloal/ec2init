@@ -23,6 +23,12 @@ export DYN_LOGIN=<dyn dns login>
 export DYN_PASS=<dyn dns password>
 export DYN_HOST=<dyn dns host>
 
+export MYSQL_PASS=<my sql password>
+export WP_DB_NAME=<wordpress sql database name>
+export WP_USER_NAME=<wordpress sql user name>
+export WP_PASSWORD=<wordpress sql password>
+
+
 yum install -y git
 
 sleep 2
