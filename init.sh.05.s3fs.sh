@@ -32,10 +32,14 @@ for BUCKET in $BUCKETS; do
 
 	BUCKETPATH=$BASE/$BUCKET
 
+
 	if [[ ! -d "$BUCKETPATH" ]]; then
+		echo "creating folder $BUCKETPATH"
 		mkdir -p $BUCKETPATH
 	fi
 
+
+	echo "changing permission"
 	chown guests:guests $BUCKETPATH
 	chmod 777 $BUCKETPATH
 
@@ -52,8 +56,13 @@ for BUCKET in $BUCKETS; do
 		echo "mounting $BUCKETPATH"
 		mount $BUCKETPATH
 		echo "mounted $BUCKETPATH"
-		find $BUCKETPATH -type d -exec chmod 777 {} \;
-		find $BUCKETPATH -type f -exec chmod 666 {} \;
+
+		echo "chaning mode of folders"
+		find $BUCKETPATH -type d -exec echo {} \; chmod 777 {} \;
+		
+		echo "changing mode of files"
+		find $BUCKETPATH -type f -exec echo {} \; -exec chmod 666 {} \;
+		echo "done"
 	else
 		echo "$BUCKETPATH already mounted"
 	fi
