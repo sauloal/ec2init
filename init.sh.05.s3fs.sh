@@ -7,14 +7,19 @@ cd /tmp
 #git clone git://github.com/tongwang/s3fs-c.git
 #cd s3fs-c/
 
-wget http://s3fs.googlecode.com/files/s3fs-1.67.tar.gz
-tar xvf s3fs-1.67.tar.gz
-cd s3fs-1.67
 
+if [[ ! -f "/usr/local/bin/s3fs" ]]; then
+	echo "installing s3fs"
+	wget http://s3fs.googlecode.com/files/s3fs-1.67.tar.gz
+	tar xvf s3fs-1.67.tar.gz
+	cd s3fs-1.67
 
-./configure
-make
-make install
+	./configure
+	make
+	make install
+else
+	echo "s3fs already installed"
+fi
 
 
 chmod 400 /etc/passwd-s3fs
@@ -24,6 +29,7 @@ chmod 400 /etc/passwd-s3fs
 
 
 BUCKETS=`s3cmd ls | gawk '{print $3}' | sed 's/s3\:\/\///'`
+
 
 for BUCKET in $BUCKETS; do
 	#BUCKET=saulo
