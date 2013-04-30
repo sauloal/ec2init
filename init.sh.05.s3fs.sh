@@ -74,7 +74,6 @@ for BUCKET in $BUCKETS; do
 	else
 		echo "$BUCKETPATH already mounted"
 	fi
-exit 0
 done
 
 
