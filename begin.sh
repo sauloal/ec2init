@@ -57,7 +57,7 @@ chmod 400 /etc/passwd-s3fs
 
 
 
-curl https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4 2>/dev/null
+curl "https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4" 2>/dev/null
 
 #TODO:
 # CHECK IF VARIABLE IS SET
