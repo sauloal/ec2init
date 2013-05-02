@@ -1,16 +1,16 @@
-2c2
-< user: git
+26c26
+<     # user: git
 ---
-> user: gitolite3
-13c13
-< repos_path: "/home/git/repositories"
+>     user: gitolite3
+30c30
+<     email_from: gitlab@localhost
 ---
-> repos_path: "/var/lib/gitolite3/repositories"
-16c16
-< auth_file: "/home/git/.ssh/authorized_keys"
+>     email_from: sauloal@gmail.com
+33c33
+<     support_email: support@localhost
 ---
-> auth_file: "/var/lib/gitolite3/.ssh/authorized_keys"
-20c20
-<   bin: /usr/bin/redis-cli
+>     support_email: sauloal@gmail.com
+36c36
+<     default_projects_limit: 10
 ---
->   bin: /bin/redis-cli
+>     default_projects_limit: 100

@@ -1,0 +1,6 @@
+10,11c10,11
+<   username: root
+<   password: "secure password"
+---
+>   username: gitlab
+>   password: <PASSWORD>
