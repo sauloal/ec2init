@@ -1,0 +1,16 @@
+2c2
+< user: git
+---
+> user: gitolite3
+13c13
+< repos_path: "/home/git/repositories"
+---
+> repos_path: "/var/lib/gitolite3/repositories"
+16c16
+< auth_file: "/home/git/.ssh/authorized_keys"
+---
+> auth_file: "/var/lib/gitolite3/.ssh/authorized_keys"
+20c20
+<   bin: /usr/bin/redis-cli
+---
+>   bin: /bin/redis-cli
