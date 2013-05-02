@@ -164,7 +164,9 @@ echo "export DYN_HOST=$DYN_HOST"                                       >> ~/.ec2
 
 if [[ -z `grep /.ec2 /etc/profile.d/saulo.sh` ]]; then 
 	echo 'modifying bashrc'
-	echo "source ~/.ec2"          >> /etc/profile.d/saulo.sh
+	echo 'if [[ -f "~/.ec2" ]]; then' >> /etc/profile.d/saulo.sh
+        echo '	source ~/.ec2'            >> /etc/profile.d/saulo.sh
+	echo 'fi'                         >> /etc/profile.d/saulo.sh
 	echo "PATH=$PATH:$BASE/tools" >> /etc/profile.d/saulo.sh
 
 else

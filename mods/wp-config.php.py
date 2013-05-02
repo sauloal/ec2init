@@ -3,7 +3,7 @@ import subprocess
 import os, sys
 import re
 
-randon_seqs = subprocess.check_output("pwgen -sy 50 200 | grep -v \\'", shell=True)
+randon_seqs = subprocess.check_output("pwgen -sy 50 200 | grep -v \\' | grep -v '\\\\'", shell=True)
 
 randon_seqs = randon_seqs.split("\n")
 
@@ -18,7 +18,7 @@ data = {
 for i in range(1,9):
 	data['WP PHRASE '+str(i)] = randon_seqs[i]
 
-print data
+#sys.stderr.write( str( data ) )
 
 #<WP DB NAME>
 #<WP USER NAME>

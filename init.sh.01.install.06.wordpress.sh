@@ -29,7 +29,7 @@ python mods/wp-config.php.py mods/wp-config.php.template > /etc/wordpress/wp-con
 python mods/wp-config.php.py mods/wp-config.php.sql      > /tmp/wp-config.sql
 
 
-mysql -h localhost -u root -p $MYSQL_PASS < /tmp/wp-config.sql
+mysql -h localhost -u root -p$MYSQL_PASS < /tmp/wp-config.sql
 
 
 rm /tmp/wp-config.sql
