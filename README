@@ -28,6 +28,7 @@ export WP_DB_NAME=<wordpress sql database name>
 export WP_USER_NAME=<wordpress sql user name>
 export WP_PASSWORD=<wordpress sql password>
 
+export GITLAB_PASS=<gitlab sql password>
 
 yum install -y git
 
