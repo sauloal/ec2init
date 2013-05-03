@@ -13,6 +13,10 @@ cd gitlab-shell/
 git checkout v1.4.0
 
 
+
+
+
+
 cd ~
 mkdir gitlab-satellites
 
@@ -28,6 +32,8 @@ mkdir tmp/pids
 mkdir tmp/sockets
 
 cd config
-if [[ ! -f "puma.rb" ]]; then
-	cp puma.rb.example puma.rb
-fi
+#if [[ ! -f "puma.rb" ]]; then
+	#cp puma.rb.example puma.rb
+#fi
+
+

@@ -119,7 +119,7 @@ production: &base
   # GitLab Satellites
   satellites:
     # Relative paths are relative to Rails.root (default: tmp/repo_satellites/)
-    path: /home/git/gitlab-satellites/
+    path: /var/lib/gitolite3/gitlab-satellites/
 
   ## Backup settings
   backup:
@@ -129,8 +129,8 @@ production: &base
   ## GitLab Shell settings
   gitlab_shell:
     # REPOS_PATH MUST NOT BE A SYMLINK!!!
-    repos_path: /home/git/repositories/
-    hooks_path: /home/git/gitlab-shell/hooks/
+    repos_path: /var/lib/gitolite3/repositories/
+    hooks_path: /var/lib/gitolite3/gitlab-shell/hooks/
 
     # Git over HTTP
     upload_pack: true
@@ -143,7 +143,7 @@ production: &base
   # CAUTION!
   # Use the default values unless you really know what you are doing
   git:
-    bin_path: /usr/bin/git
+    bin_path: /bin/git
     # Max size of a git object (e.g. a commit), in bytes
     # This value can be increased if you have very large commits
     max_size: 5242880 # 5.megabytes

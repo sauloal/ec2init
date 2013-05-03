@@ -14,3 +14,17 @@
 <     default_projects_limit: 10
 ---
 >     default_projects_limit: 100
+122c122
+<     path: /home/git/gitlab-satellites/
+---
+>     path: /var/lib/gitolite3/gitlab-satellites/
+132,133c132,133
+<     repos_path: /home/git/repositories/
+<     hooks_path: /home/git/gitlab-shell/hooks/
+---
+>     repos_path: /var/lib/gitolite3/repositories/
+>     hooks_path: /var/lib/gitolite3/gitlab-shell/hooks/
+146c146
+<     bin_path: /usr/bin/git
+---
+>     bin_path: /bin/git
