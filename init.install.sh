@@ -22,7 +22,9 @@ yum install -y --skip-broken binutils coreutils moreutils make automake gcc gcc-
 yum install -y --skip-broken python-devel
 yum install -y --skip-broken unzip
 yum install -y --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
-
+set +xeu
+yum install -y --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
+set -xeu
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
 	wget -O /tmp/fusion_free.rpm  http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-18.noarch.rpm
