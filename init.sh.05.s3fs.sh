@@ -89,17 +89,17 @@ for BUCKET in $BUCKETS; do
 		echo "mounted $BUCKETPATH"
 
 		firstfile=`ls $BUCKETPATH | head -1`
-		filemode=`stat -c %a $BUCKETPATH/$firstfile`
+		filemode=`stat -c %a "$BUCKETPATH/$firstfile"`
 
 		echo "  first file $firstfile"
 		echo "  file mode $filemode"
 
 		if [[ $filemode -eq 0 ]]; then
 			echo "    chaning mode of folders"
-			find $BUCKETPATH/ -mindepth 1 -type d -exec echo changing permission of folder {} \; -exec chmod 777 {} \;
+			find $BUCKETPATH/ -mindepth 1 -type d -exec echo changing permission of folder {} \; -exec chmod 777 "{}" \;
 		
 			echo "    changing mode of files"
-			find $BUCKETPATH/ -mindepth 1 -type f -exec echo changing permission of file {} \; -exec chmod 666 {} \;
+			find $BUCKETPATH/ -mindepth 1 -type f -exec echo changing permission of file {} \; -exec chmod 666 "{}" \;
 		else
 			echo "    file mode already correct"
 		fi
