@@ -25,6 +25,7 @@ fi
 cp ~/.sync.json /home/$DEFAULT_USER/
 chmod 400 ~/.sync.json
 chmod 400 /home/$DEFAULT_USER/.sync.json
+chown $DEFAULT_USER:$DEFAULT_USER /home/$DEFAULT_USER/.sync.json
 
 
 systemctl --system daemon-reload
