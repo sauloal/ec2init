@@ -18,6 +18,7 @@ cd /tmp
 #git clone git://github.com/tongwang/s3fs-c.git
 #cd s3fs-c/
 
+yum install -yt --skip-broken openssl-devel
 
 if [[ ! -f "/usr/local/bin/s3fs" ]]; then
 	echo "installing s3fs"
