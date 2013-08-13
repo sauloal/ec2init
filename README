@@ -67,11 +67,12 @@ init.sh will call the remaining init scripts.
 
 
 Used with AMI:
-https://fedoraproject.org/wiki/Cloud_images  			
-Fedora-18-ec2-20130105-i386-sda (ami-cafef1be)				
-eu-west-1b				
-t1.micro				
-user	ec2-user			
+https://fedoraproject.org/wiki/Cloud_images  	
+Fedora-i386-19-20130627-sda
+ami-9f031eeb
+eu-west-1c
+t1.micro
+user	ec2-user
 
 iSCSI using:
 http://www.server-world.info/en/note?os=Fedora_18&p=iscsi&f=1
