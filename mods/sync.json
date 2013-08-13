@@ -27,7 +27,7 @@
 */
   "webui" :
   {
-    "listen" : "0.0.0.0:8888",
+    "listen" : "127.0.0.1:9999",
     "login" : "<BT_USER>",
     "password" : "<BT_PASS>"
   }
