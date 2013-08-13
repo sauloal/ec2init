@@ -76,13 +76,13 @@ curl "https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&my
 
 
 
-if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
-	echo "disks not attached yet. attaching"
-	source ~/ec2init/init.attach.sh
-	touch  ~/ec2init/init.attach.sh.skip
-else
-	echo "disks already attached"
-fi
+#if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
+#	echo "disks not attached yet. attaching"
+#	source ~/ec2init/init.attach.sh
+#	touch  ~/ec2init/init.attach.sh.skip
+#else
+#	echo "disks already attached"
+#fi
 
 
 
