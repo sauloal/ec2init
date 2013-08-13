@@ -61,7 +61,6 @@ for BUCKET in $BUCKETS; do
 
 	BUCKETPATH=$BASE/$BUCKET
 
-	if grep
 
 	if [[ ! -d "$BUCKETPATH" ]]; then
 		echo "creating folder $BUCKETPATH"
