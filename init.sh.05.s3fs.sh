@@ -12,7 +12,7 @@ fi
 chown guests:guests $BASE
 chmod 777 $BASE
 
-V=1.72
+V=1.71
 cd /tmp
 
 #git clone git://github.com/tongwang/s3fs-c.git
