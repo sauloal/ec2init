@@ -17,7 +17,7 @@ chmod +x /etc/init.d/btsyncd
 
 if [[ ! -f "~/.sync.json" ]]; then
 	echo "copying sync.json"
-	sed -e 's/<BT_USER>/'$BTSYNC_USER'/g' -e 's/<BT_PASS>/'$BTSYNC_PASS'/g' mods/btsync.json  >  ~/.sync.json
+	sed -e 's/<BT_USER>/'$BTSYNC_USER'/g' -e 's/<BT_PASS>/'$BTSYNC_PASS'/g' -e 's/<EC2_EXTERNAL_CONFIG_DST>/'$EC2_EXTERNAL_CONFIG_DST'/g' mods/btsync.json  >  ~/.sync.json
 else
 	echo "sync.json already present"
 fi
