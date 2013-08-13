@@ -30,7 +30,6 @@ yum install -yt --skip-broken binutils coreutils moreutils automake gcc gcc-c++ 
 yum install -yt --skip-broken python-devel
 yum install -yt --skip-broken unzip
 yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
-yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
 
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
