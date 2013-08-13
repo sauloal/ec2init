@@ -100,15 +100,15 @@ else
 	EC2_EXTERNAL_CONFIG_PRESENT=""
 fi
 
-if [[ ! -z "$EC2_EXTERNAL_DATA_SRC" ]]; then
-	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_DATA_SRC` ]]; then
-		EC2_EXTERNAL_DATA_PRESENT=""
-	else
-		EC2_EXTERNAL_DATA_PRESENT="OK"
-	fi
-else
+#if [[ ! -z "$EC2_EXTERNAL_DATA_SRC" ]]; then
+#	if [[ -z `fdisk -l | grep $EC2_EXTERNAL_DATA_SRC` ]]; then
+#		EC2_EXTERNAL_DATA_PRESENT=""
+#	else
+#		EC2_EXTERNAL_DATA_PRESENT="OK"
+#	fi
+#else
 	EC2_EXTERNAL_DATA_PRESENT=""
-fi
+#fi
 
 
 
@@ -153,9 +153,9 @@ echo "export EC2_EXTERNAL_CONFIG_SRC=$EC2_EXTERNAL_CONFIG_SRC"         >> ~/.ec2
 echo "export EC2_EXTERNAL_CONFIG_DST=$EC2_EXTERNAL_CONFIG_DST"         >> ~/.ec2
 echo "export EC2_EXTERNAL_CONFIG_PRESENT=$EC2_EXTERNAL_CONFIG_PRESENT" >> ~/.ec2
 
-echo "export EC2_EXTERNAL_DATA_VOL=$EC2_EXTERNAL_DATA_VOL"             >> ~/.ec2
-echo "export EC2_EXTERNAL_DATA_SRC=$EC2_EXTERNAL_DATA_SRC"             >> ~/.ec2
-echo "export EC2_EXTERNAL_DATA_DST=$EC2_EXTERNAL_DATA_DST"             >> ~/.ec2
+#echo "export EC2_EXTERNAL_DATA_VOL=$EC2_EXTERNAL_DATA_VOL"             >> ~/.ec2
+#echo "export EC2_EXTERNAL_DATA_SRC=$EC2_EXTERNAL_DATA_SRC"             >> ~/.ec2
+#echo "export EC2_EXTERNAL_DATA_DST=$EC2_EXTERNAL_DATA_DST"             >> ~/.ec2
 echo "export EC2_EXTERNAL_DATA_PRESENT=$EC2_EXTERNAL_DATA_PRESENT"     >> ~/.ec2
 
 echo "export DYN_HOST=$DYN_HOST"                                       >> ~/.ec2
