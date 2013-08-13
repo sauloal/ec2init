@@ -6,19 +6,33 @@ echo "RUNNING INSTALL"
 ###############
 set +xeu
 yum clean all
+yum install -yt --skip-broken deltarpm
 yum update  -yt
 
 yum clean all
 yum update  -yt
-set -xeu
 
-yum install -yt --skip-broken deltarpm
-yum install -yt --skip-broken psmisc mlocate which htop audit
-set +xeu
+yum install -yt --skip-broken psmisc 
+yum install -yt --skip-broken mlocate 
+yum install -yt --skip-broken which 
+yum install -yt --skip-broken htop 
+yum install -yt --skip-broken audit
 yum install -yt --skip-broken make
-set -xeu
-yum install -yt --skip-broken binutils coreutils moreutils automake gcc gcc-c++ kernel-devel
-yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
+yum install -yt --skip-broken binutils 
+yum install -yt --skip-broken coreutils 
+yum install -yt --skip-broken moreutils 
+yum install -yt --skip-broken automake 
+yum install -yt --skip-broken gcc 
+yum install -yt --skip-broken gcc-c++ 
+yum install -yt --skip-broken kernel-devel
+yum install -yt --skip-broken fuse
+yum install -yt --skip-broken fuse-devel
+yum install -yt --skip-broken libcurl
+yum install -yt --skip-broken libcurl-devel
+yum install -yt --skip-broken libxml
+yum install -yt --skip-broken libxml-devel
+yum install -yt --skip-broken libxml2
+yum install -yt --skip-broken libxml2-devel
 
 yum install -yt --skip-broken cloud-utils
 yum install -yt --skip-broken wget
@@ -29,7 +43,7 @@ yum install -yt --skip-broken unzip
 yum install -yt --skip-broken perl-CPAN
 yum install -yt --skip-broken python-devel
 
-
+set -xeu
 
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
