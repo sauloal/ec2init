@@ -17,6 +17,7 @@ yum install -yt --skip-broken mlocate
 yum install -yt --skip-broken which 
 yum install -yt --skip-broken htop 
 yum install -yt --skip-broken audit
+yum install -yt --skip-broken glibc-headers
 yum install -yt --skip-broken make
 yum install -yt --skip-broken binutils 
 yum install -yt --skip-broken coreutils 
