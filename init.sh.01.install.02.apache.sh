@@ -1,7 +1,7 @@
 ###############
 #apache
 ###############
-yum install -y httpd
+yum install -yt --skip-broken httpd
 
 #APACHE
 systemctl enable httpd.service
