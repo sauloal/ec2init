@@ -76,13 +76,13 @@ curl "https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&my
 
 
 
-#if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
-#	echo "disks not attached yet. attaching"
-#	source ~/ec2init/init.attach.sh
-#	touch  ~/ec2init/init.attach.sh.skip
-#else
-#	echo "disks already attached"
-#fi
+if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
+	echo "disks not attached yet. attaching"
+	source ~/ec2init/init.attach.sh
+	touch  ~/ec2init/init.attach.sh.skip
+else
+	echo "disks already attached"
+fi
 
 
 
@@ -174,10 +174,14 @@ else
 	grep /.ec2 /etc/profile.d/saulo.sh
 fi
 
+
 cp ~/.ec2    /home/$DEFAULT_USER/.ec2
 cp ~/.boto   /home/$DEFAULT_USER/.boto
 cp ~/.bashrc /home/$DEFAULT_USER/.bashrc
 
+chown $DEFAULT_USER:$DEFAULT_USER /home/$DEFAULT_USER/.ec2
+chown $DEFAULT_USER:$DEFAULT_USER /home/$DEFAULT_USER/.boto
+chown $DEFAULT_USER:$DEFAULT_USER /home/$DEFAULT_USER/.bashrc
 
 
 for file in $BASE/init.sh.*.sh; do
