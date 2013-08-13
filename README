@@ -32,6 +32,7 @@ export GITLAB_PASS=<gitlab sql password>
 export BTSYNC_USER=<btsync user>
 export BTSYNC_PASS=<btsync pass>
 
+yum clean all
 yum install -y git
 
 sleep 2
