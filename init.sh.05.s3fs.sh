@@ -20,9 +20,10 @@ cd /tmp
 
 if [[ ! -f "/usr/local/bin/s3fs" ]]; then
 	echo "installing s3fs"
-	wget http://s3fs.googlecode.com/files/s3fs-1.67.tar.gz
-	tar xvf s3fs-1.67.tar.gz
-	cd s3fs-1.67
+	#wget -O s3fs.tar.gz http://s3fs.googlecode.com/files/s3fs-1.67.tar.gz
+	wget -O s3fs.tar.gz https://s3fs.googlecode.com/files/s3fs-1.72.tar.gz
+	tar xvf s3fs.tar.gz
+	cd s3fs
 
 	./configure
 	make
