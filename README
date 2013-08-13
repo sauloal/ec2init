@@ -72,7 +72,7 @@ Fedora-i386-19-20130627-sda
 ami-9f031eeb
 eu-west-1c
 t1.micro
-user	ec2-user
+user	fedora
 
 iSCSI using:
 http://www.server-world.info/en/note?os=Fedora_18&p=iscsi&f=1
