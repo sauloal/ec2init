@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# chkconfig: 2345 80 30
+# description: btsync
+#
+# BTsyncd This shell script takes care of starting and stopping BTsync
+# description: BTsync is an awesome synchronization tool.
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+[ -f /usr/bin/btsync ] || exit 0
+
+case "$1" in
+start)
+action "Starting btsyncd: " /usr/bin/btsync --conf ~/.sync.json
+;;
+stop)
+action "Stopping btsyncd: " killall btsync
+;;
+*)
+echo "Usage: btsyncd {start|stop}"
+exit 1
+esac
+exit 0
