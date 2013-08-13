@@ -18,13 +18,15 @@ yum install -yt --skip-broken perl-CPAN
 yum install -yt --skip-broken patch
 yum install -yt --skip-broken mlocate
 yum remove  -yt --skip-broken audit
-yum install -yt --skip-broken binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
+set +xeu
+yum install -yt --skip-broken make
+set -xeu
+yum install -yt --skip-broken binutils coreutils moreutils automake gcc gcc-c++ kernel-devel
 yum install -yt --skip-broken python-devel
 yum install -yt --skip-broken unzip
 yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
-set +xeu
 yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
-set -xeu
+
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
 	wget -O /tmp/fusion_free.rpm  http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-18.noarch.rpm
