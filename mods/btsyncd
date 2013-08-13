@@ -13,7 +13,7 @@
 
 case "$1" in
 start)
-action "Starting btsyncd: " /usr/bin/btsync --conf ~/.sync.json
+action "Starting btsyncd: " /usr/bin/btsync --config ~/.sync.json
 ;;
 stop)
 action "Stopping btsyncd: " killall btsync
