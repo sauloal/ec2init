@@ -13,23 +13,23 @@ yum update  -yt
 set -xeu
 
 yum install -yt --skip-broken deltarpm
-yum install -yt --skip-broken wget
-yum install -yt --skip-broken byobu
-yum install -yt --skip-broken which
-yum install -yt --skip-broken nano
-yum install -yt --skip-broken htop
-yum install -yt --skip-broken cloud-utils
-yum install -yt --skip-broken perl-CPAN
-yum install -yt --skip-broken patch
-yum install -yt --skip-broken mlocate
-yum remove  -yt --skip-broken audit
+yum install -yt --skip-broken psmisc mlocate which htop audit
 set +xeu
 yum install -yt --skip-broken make
 set -xeu
 yum install -yt --skip-broken binutils coreutils moreutils automake gcc gcc-c++ kernel-devel
-yum install -yt --skip-broken python-devel
-yum install -yt --skip-broken unzip
 yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
+
+yum install -yt --skip-broken cloud-utils
+yum install -yt --skip-broken wget
+yum install -yt --skip-broken byobu
+yum install -yt --skip-broken nano
+yum install -yt --skip-broken patch
+yum install -yt --skip-broken unzip
+yum install -yt --skip-broken perl-CPAN
+yum install -yt --skip-broken python-devel
+
+
 
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
