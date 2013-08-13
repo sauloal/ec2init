@@ -13,7 +13,7 @@ if [[ ! -f "${WEBMINTMP}" ]]; then
 fi
 
 
-yum install -y perl make openssl perl-Authen-PAM
+yum install -yt --skip-broken perl openssl perl-Authen-PAM
 
 
 
