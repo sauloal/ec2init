@@ -4,22 +4,24 @@ echo "RUNNING INSTALL"
 ###############
 #misc
 ###############
+yum clean all
 yum update  -y
 
-yum install -y wget
-yum install -y byobu
-yum install -y which
-yum install -y nano
-yum install -y htop
-yum install -y cloud-utils
-yum install -y perl-CPAN
-yum install -y patch
-yum install -y mlocate
-yum remove  -y audit
-yum install -y binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
-yum install -y python-devel
-yum install -y unzip
-yum install -y fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
+yum install -y --skip-broken deltarpm
+yum install -y --skip-broken wget
+yum install -y --skip-broken byobu
+yum install -y --skip-broken which
+yum install -y --skip-broken nano
+yum install -y --skip-broken htop
+yum install -y --skip-broken cloud-utils
+yum install -y --skip-broken perl-CPAN
+yum install -y --skip-broken patch
+yum install -y --skip-broken mlocate
+yum remove  -y --skip-broken audit
+yum install -y --skip-broken binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
+yum install -y --skip-broken python-devel
+yum install -y --skip-broken unzip
+yum install -y --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
 
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
