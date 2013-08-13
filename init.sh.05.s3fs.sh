@@ -51,11 +51,12 @@ for BUCKET in $BUCKETS; do
 	echo "adding bucket $BUCKET"
 
 	R=`grep -x $BUCKET ~/ec2init/mods/s3fs_forbidden`
+	echo "R $R"
 	if [[ ! -z "$R" ]]; then
-		echo there
+		echo "FORBIDDEN"
 		continue
 	else
-		echo not there
+		echo "ALLOWED"
 	fi
 
 
