@@ -8,7 +8,7 @@ cp btsync /usr/bin/btsync
 
 if [[ ! -f "/etc/rc.d/init.d/btsyncd" ]]; then
 	echo "copying btsyncd"
-	sed 's/<DEFAULT_USER>/'$DEFAULT_USER'/' mods/btsyncd > /etc/rc.d/init.d/btsyncd
+	sed 's/<DEFAULT_USER>/'$DEFAULT_USER'/g' mods/btsyncd > /etc/rc.d/init.d/btsyncd
 else
 	echo "btsyncd already present"
 fi
@@ -17,7 +17,7 @@ chmod +x /etc/init.d/btsyncd
 
 if [[ ! -f "~/.sync.json" ]]; then
 	echo "copying sync.json"
-	sed -e 's/<BT_USER>/'$BTSYNC_USER'/' -e 's/<BT_PASS>/'$BTSYNC_PASS'/' mods/btsync.json  >  ~/.sync.json
+	sed -e 's/<BT_USER>/'$BTSYNC_USER'/g' -e 's/<BT_PASS>/'$BTSYNC_PASS'/g' mods/btsync.json  >  ~/.sync.json
 else
 	echo "sync.json already present"
 fi
