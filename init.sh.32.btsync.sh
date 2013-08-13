@@ -22,7 +22,7 @@ else
 	echo "sync.json already present"
 fi
 
-~/.sync.json /home/$DEFAULT_USER/
+cp ~/.sync.json /home/$DEFAULT_USER/
 chmod 400 ~/.sync.json
 chmod 400 /home/$DEFAULT_USER/.sync.json
 
