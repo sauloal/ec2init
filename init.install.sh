@@ -4,8 +4,13 @@ echo "RUNNING INSTALL"
 ###############
 #misc
 ###############
+set +xeu
 yum clean all
 yum update  -yt
+
+yum clean all
+yum update  -yt
+set -xeu
 
 yum install -yt --skip-broken deltarpm
 yum install -yt --skip-broken wget
