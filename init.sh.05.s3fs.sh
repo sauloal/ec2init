@@ -50,6 +50,7 @@ for BUCKET in $BUCKETS; do
 
 	echo "adding bucket $BUCKET"
 
+	set +xeu
 	R=`grep -x $BUCKET ~/ec2init/mods/s3fs_forbidden`
 	echo "R $R"
 	if [[ ! -z "$R" ]]; then
@@ -58,7 +59,7 @@ for BUCKET in $BUCKETS; do
 	else
 		echo "ALLOWED"
 	fi
-
+	set -xeu
 
 	BUCKETPATH=$BASE/$BUCKET
 
