@@ -1,3 +1,4 @@
+exit 0
 set -xeu
 #yum install gitolite3
 
