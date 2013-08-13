@@ -5,25 +5,25 @@ echo "RUNNING INSTALL"
 #misc
 ###############
 yum clean all
-yum update  -y
+yum update  -yt
 
-yum install -y --skip-broken deltarpm
-yum install -y --skip-broken wget
-yum install -y --skip-broken byobu
-yum install -y --skip-broken which
-yum install -y --skip-broken nano
-yum install -y --skip-broken htop
-yum install -y --skip-broken cloud-utils
-yum install -y --skip-broken perl-CPAN
-yum install -y --skip-broken patch
-yum install -y --skip-broken mlocate
-yum remove  -y --skip-broken audit
-yum install -y --skip-broken binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
-yum install -y --skip-broken python-devel
-yum install -y --skip-broken unzip
-yum install -y --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
+yum install -yt --skip-broken deltarpm
+yum install -yt --skip-broken wget
+yum install -yt --skip-broken byobu
+yum install -yt --skip-broken which
+yum install -yt --skip-broken nano
+yum install -yt --skip-broken htop
+yum install -yt --skip-broken cloud-utils
+yum install -yt --skip-broken perl-CPAN
+yum install -yt --skip-broken patch
+yum install -yt --skip-broken mlocate
+yum remove  -yt --skip-broken audit
+yum install -yt --skip-broken binutils coreutils moreutils make automake gcc gcc-c++ kernel-devel
+yum install -yt --skip-broken python-devel
+yum install -yt --skip-broken unzip
+yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
 set +xeu
-yum install -y --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
+yum install -yt --skip-broken fuse fuse-devel libcurl libcurl-devel libxml libxml-devel libxml2 libxml2-devel
 set -xeu
 
 if [[ -z `yum list installed | gawk '{print $1}' | grep rpmfusion-free` ]]; then
