@@ -50,8 +50,18 @@ for BUCKET in $BUCKETS; do
 
 	echo "adding bucket $BUCKET"
 
+	R=`grep -x $BUCKET ~/ec2init/mods/s3fs_forbidden`
+	if [[ ! -z "$R" ]]; then
+		echo there
+		continue
+	else
+		echo not there
+	fi
+
+
 	BUCKETPATH=$BASE/$BUCKET
 
+	if grep
 
 	if [[ ! -d "$BUCKETPATH" ]]; then
 		echo "creating folder $BUCKETPATH"
