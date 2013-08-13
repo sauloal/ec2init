@@ -174,9 +174,9 @@ else
 	grep /.ec2 /etc/profile.d/saulo.sh
 fi
 
-cp ~/.ec2    ~$DEFAULT_USER/
-cp ~/.boto   ~$DEFAULT_USER/
-cp ~/.bashrc ~$DEFAULT_USER/
+cp ~/.ec2    /home/$DEFAULT_USER/.ec2
+cp ~/.boto   /home/$DEFAULT_USER/.boto
+cp ~/.bashrc /home/$DEFAULT_USER/.bashrc
 
 
 
