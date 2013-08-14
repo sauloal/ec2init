@@ -7,7 +7,7 @@
    where binary is located.
    otherwise user-defined directory will be used
 */
-  "storage_path" : "<EC2_EXTERNAL_CONFIG_DST>/owncloud",
+  "storage_path" : "<EC2_EXTERNAL_CONFIG_DST>/owncloud/data",
 
 // uncomment next line if you want to set location of pid file
 // "pid_file" : "/var/run/btsync/btsync.pid",
