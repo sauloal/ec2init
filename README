@@ -7,6 +7,7 @@ When starting ec2 add the following user data:
 set -xeu
 export DEFAULT_USER=fedora
 #export DEFAULT_USER=ec2-user
+export EXTERNAL_SYNC_FOLDER=/mnt/sync
 
 export EC2_ACCESS_KEY=<your access key>
 export EC2_SECRET_ACCESS_KEY=<your secret key>
@@ -17,9 +18,9 @@ export EC2_EXTERNAL_CONFIG_VOL=<small config (sql, owncloud, etc) volume>
 export EC2_EXTERNAL_CONFIG_SRC=/dev/xvdf
 export EC2_EXTERNAL_CONFIG_DST=/mnt/config
 
-export EC2_EXTERNAL_DATA_VOL=<big data volume>
-export EC2_EXTERNAL_DATA_SRC=/dev/xvdg
-export EC2_EXTERNAL_DATA_DST=/mnt/data
+#export EC2_EXTERNAL_DATA_VOL=<big data volume>
+#export EC2_EXTERNAL_DATA_SRC=/dev/xvdg
+#export EC2_EXTERNAL_DATA_DST=/mnt/data
 
 export DYN_LOGIN=<dyn dns login>
 export DYN_PASS=<dyn dns password>
