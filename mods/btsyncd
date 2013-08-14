@@ -13,7 +13,7 @@
 
 case "$1" in
 start)
-action "Starting btsyncd: " sudo -u <DEFAULT_USER> /usr/bin/btsync --config /etc/.sync.json
+action "Starting btsyncd: " sudo -u <EFFECTIVE_USER> /usr/bin/btsync --config <CONFIG_FILE>
 ;;
 stop)
 action "Stopping btsyncd: " killall btsync
