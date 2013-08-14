@@ -14,6 +14,11 @@ service httpd restart
 setenforce 0
 cp -f --no-preserve=all mods/selinux.new /etc/sysconfig/selinux
 
+if [[ ! -d '/mnt/sync' ]]; then
+  mkdir /mnt/sync
+  chown root:apache /mnt/sync
+  chmod 770 /mnt/sync
+fi
 
 #################
 # OwnCloud
