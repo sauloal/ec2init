@@ -23,9 +23,13 @@ else
 fi
 
 cp ~/.sync.json /home/$DEFAULT_USER/
+cp ~/.sync.json /etc/
+
 chmod 440 ~/.sync.json
 chmod 440 /home/$DEFAULT_USER/.sync.json
+chmod 440 /etc/.sync.json
 chown $DEFAULT_USER:apache /home/$DEFAULT_USER/.sync.json
+chown $DEFAULT_USER:apache /etc/.sync.json
 
 
 systemctl --system daemon-reload
