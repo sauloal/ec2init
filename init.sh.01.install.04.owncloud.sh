@@ -14,34 +14,35 @@ service httpd restart
 setenforce 0
 cp -f --no-preserve=all mods/selinux.new /etc/sysconfig/selinux
 
-if [[ ! -d '/mnt/sync' ]]; then
-  mkdir /mnt/sync
-  chown root:apache /mnt/sync
-  chmod 770 /mnt/sync
+if [[ ! -d "$EXTERNAL_SYNC_FOLDER" ]]; then
+  mkdir $EXTERNAL_SYNC_FOLDER
+  chown root:apache $EXTERNAL_SYNC_FOLDER
+  chmod 770 $EXTERNAL_SYNC_FOLDER
 fi
 
 #################
 # OwnCloud
 #################
 if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
+  OWNCLOUD_DST=$EC2_EXTERNAL_CONFIG_DST/owncloud
   echo "mounting owncloud to external"
-  if [[ ! -e "$EC2_EXTERNAL_CONFIG_DST/owncloud" ]]; then
-    mkdir -p $EC2_EXTERNAL_CONFIG_DST/owncloud
-    chown -R apache:apache $EC2_EXTERNAL_CONFIG_DST/owncloud
+  if [[ ! -e "$OWNCLOUD_DST" ]]; then
+    mkdir -p $OWNCLOUD_DST
+    chown -R apache:apache $OWNCLOUD_DST
     chown -R apache:apache /var/www/html/owncloud
-    chmod 0774 $EC2_EXTERNAL_CONFIG_DST/owncloud
+    chmod 0774 $OWNCLOUD_DST
   fi
   
   if [[ -z `grep owncloud /etc/fstab` ]]; then
     echo "adding owncloud to fstab"
-    echo "$EC2_EXTERNAL_CONFIG_DST/owncloud   /var/www/html/owncloud        bind    bind    0" >> /etc/fstab
+    echo "$OWNCLOUD_DST   /var/www/html/owncloud        bind    bind    0" >> /etc/fstab
   else
     echo "owncloud already in fstab"
   fi
   
   if [[ -z `mount | grep "owncloud"` ]]; then
     echo "mounting owncloud"
-    mount --bind $EC2_EXTERNAL_CONFIG_DST/owncloud /var/www/html/owncloud
+    mount --bind $OWNCLOUD_DST /var/www/html/owncloud
     mount --make-shared /var/www/html/owncloud
   else
     echo "owncloud already mounted"
