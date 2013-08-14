@@ -23,8 +23,8 @@ else
 fi
 
 cp ~/.sync.json /home/$DEFAULT_USER/
-chmod 400 ~/.sync.json
-chmod 400 /home/$DEFAULT_USER/.sync.json
+chmod 440 ~/.sync.json
+chmod 440 /home/$DEFAULT_USER/.sync.json
 chown $DEFAULT_USER:apache /home/$DEFAULT_USER/.sync.json
 
 
