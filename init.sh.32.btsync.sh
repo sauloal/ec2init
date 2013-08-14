@@ -8,7 +8,7 @@ cp btsync /usr/bin/btsync
 
 if [[ ! -f "/etc/rc.d/init.d/btsyncd" ]]; then
 	echo "copying btsyncd"
-	sed 's/<DEFAULT_USER>/'$DEFAULT_USER'/g' mods/btsyncd > /etc/rc.d/init.d/btsyncd
+	sed 's/<DEFAULT_USER>/apache/g' mods/btsyncd > /etc/rc.d/init.d/btsyncd
 else
 	echo "btsyncd already present"
 fi
@@ -25,7 +25,7 @@ fi
 cp ~/.sync.json /home/$DEFAULT_USER/
 chmod 400 ~/.sync.json
 chmod 400 /home/$DEFAULT_USER/.sync.json
-chown $DEFAULT_USER:$DEFAULT_USER /home/$DEFAULT_USER/.sync.json
+chown $DEFAULT_USER:apache /home/$DEFAULT_USER/.sync.json
 
 
 systemctl --system daemon-reload
