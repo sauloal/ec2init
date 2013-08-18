@@ -75,6 +75,19 @@ def mountvol(vars):
 	else:
 		print "  success"
 
+	#TODO: add to fstab
+	#if [[ -z `grep $EC2_EXTERNAL_CONFIG_SRC /etc/fstab` ]]; then
+	#    echo "adding external $EC2_EXTERNAL_CONFIG_SRC to fstab"
+	#    #http://blog.smartlogicsolutions.com/2009/06/04/mount-options-to-improve-ext4-file-system-performance/
+	#    #gid 19 = floppy
+	#    #data=ordered
+	  
+	#    echo "$EC2_EXTERNAL_CONFIG_SRC   $EC2_EXTERNAL_CONFIG_DST        ext4    rw,user,auto,noatime,exec,relatime,seclabel,data=writeback,barrier=0,nobh,errors=remount-ro    0 0" >> /etc/fstab
+	  
+	#  else
+	#    echo "external already in fstab"
+	#  fi
+
 
 def loadconfig():
 	setup  = {}
