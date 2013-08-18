@@ -21,7 +21,7 @@ if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
 	
 	
 	
-	if [[ ! -d "$BT_CONF" ]]; then
+	if [[ ! -d "$BT_CONF_FOLDER" ]]; then
 		mkdir $BT_CONF_FOLDER
 		chown root:apache $BT_CONF_FOLDER
 	  	chmod 770 $BT_CONF_FOLDER
