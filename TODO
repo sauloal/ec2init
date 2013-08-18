@@ -1,0 +1,3 @@
+- refactory to use python disk attacher instead of global variable for setup disk
+- use dedup
+
