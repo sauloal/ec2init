@@ -25,14 +25,18 @@ if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
 		mkdir $BT_CONF_FOLDER
 		chown root:apache $BT_CONF_FOLDER
 	  	chmod 770 $BT_CONF_FOLDER
+	else
+		echo "BT CONF FOLDER $BT_CONF_FOLDER ALREADY PRESENT"
 	fi
 	
 	
 	
 	if [[ ! -d "$EXTERNAL_SYNC_FOLDER" ]]; then
-	  mkdir $EXTERNAL_SYNC_FOLDER
-	  chown root:apache $EXTERNAL_SYNC_FOLDER
-	  chmod 770 $EXTERNAL_SYNC_FOLDER
+		mkdir $EXTERNAL_SYNC_FOLDER
+		chown root:apache $EXTERNAL_SYNC_FOLDER
+		chmod 770 $EXTERNAL_SYNC_FOLDER
+	else
+		echo "EXTERNAL SYNC FOLDER $EXTERNAL_SYNC_FOLDER EXISTS"
 	fi
 	
 	
