@@ -6,7 +6,7 @@ tar xvf btsync.tar.gz
 
 cp btsync /usr/bin/btsync
 
-if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
+if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	BT_CONF_FOLDER="$EC2_EXTERNAL_CONFIG_DST/bittorrentsync"
 	SYNC_JSON="$BT_CONF_FOLDER/.sync.json"
 	BTSYNC_D=/etc/init.d/btsyncd

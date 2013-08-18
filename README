@@ -8,28 +8,22 @@ set -xeu
 export DEFAULT_USER=fedora
 #export DEFAULT_USER=ec2-user
 export EXTERNAL_SYNC_FOLDER=/mnt/sync
+export EC2_EXTERNAL_CONFIG_DST=/mnt/config
+
 
 export EC2_ACCESS_KEY=<your access key>
 export EC2_SECRET_ACCESS_KEY=<your secret key>
 
 export EC2_ARN=<arn>
 
-export EC2_EXTERNAL_CONFIG_VOL=<small config (sql, owncloud, etc) volume>
-export EC2_EXTERNAL_CONFIG_SRC=/dev/xvdf
-export EC2_EXTERNAL_CONFIG_DST=/mnt/config
-
-#export EC2_EXTERNAL_DATA_VOL=<big data volume>
-#export EC2_EXTERNAL_DATA_SRC=/dev/xvdg
-#export EC2_EXTERNAL_DATA_DST=/mnt/data
-
 export DYN_LOGIN=<dyn dns login>
 export DYN_PASS=<dyn dns password>
 export DYN_HOST=<dyn dns host>
 
-export MYSQL_PASS=<my sql password>
-export WP_DB_NAME=<wordpress sql database name>
-export WP_USER_NAME=<wordpress sql user name>
-export WP_PASSWORD=<wordpress sql password>
+#export MYSQL_PASS=<my sql password>
+#export WP_DB_NAME=<wordpress sql database name>
+#export WP_USER_NAME=<wordpress sql user name>
+#export WP_PASSWORD=<wordpress sql password>
 
 export GITLAB_PASS=<gitlab sql password>
 export BTSYNC_USER=<btsync user>
