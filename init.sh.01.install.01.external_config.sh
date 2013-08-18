@@ -6,6 +6,13 @@
 #usermod -a -G floppy apache
 #useradd -g floppy -G floppy -d /mnt -M -r -s /sbin/nologin -u 19 floppy
 
+if [[ -f "mountpoints.cfg" ]]; then
+  ##VOLUME NAME    DEVICE NAME     MOUNT POINT     REGION  INSTANCE
+  python tools/attachvolume.py mountpoints.cfg
+else
+  echo "no mountpoint file"
+fi
+
 if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
   if [[ ! -e "$EC2_EXTERNAL_CONFIG_DST" ]]; then
     mkdir $EC2_EXTERNAL_CONFIG_DST
