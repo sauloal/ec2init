@@ -7,12 +7,21 @@ echo "RUNNING INSTALL"
 set +xeu
 yum clean all
 yum install -yt --skip-broken deltarpm
-yum update  -yt
 
 yum clean all
-yum update  -yt
+yum update  -yt --skip-broken 
+
+yum clean all
+yum update  -yt --skip-broken 
+
+yum clean all
+yum update  -yt --skip-broken 
 
 yum install -yt --skip-broken psmisc 
+
+yum clean all
+yum update  -yt --skip-broken 
+
 yum install -yt --skip-broken mlocate 
 yum install -yt --skip-broken which 
 yum install -yt --skip-broken htop 
