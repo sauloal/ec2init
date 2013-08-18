@@ -1,6 +1,6 @@
 #!/bin/python
 #http://stackoverflow.com/questions/5251057/using-boto-to-find-to-which-device-and-ebs-volume-is-mounted
-import os
+import os, sys
 import boto
 import boto.ec2
 
