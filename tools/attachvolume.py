@@ -131,7 +131,7 @@ def mountvol(vars, fstab):
 			#rw,user,auto,noatime,exec,relatime,seclabel,data=writeback,barrier=0,nobh,errors=remount-ro
 			fscmd= "\n\n#%s\t%s\n%s\t%s\t%s\t%s\t%s" % ( vol, st, dev, mount, fstype, fsopt, '0\t0' )
 			print "MOUNTING :: DEV", dev,"MOUNT POINT",mount,"ADDING TO FSTAB :: NOT IN FSTAB ::", fscmd
-			#open( '/etc/fstab', 'a+' ).write( fscmd )
+			open( '/etc/fstab', 'a+' ).write( fscmd )
 		else:
 			print "MOUNTING :: DEV", dev,"MOUNT POINT",mount,"ADDING TO FSTAB :: ALREADY IN FSTAB"
 
