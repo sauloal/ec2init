@@ -46,6 +46,7 @@ yum install -yt --skip-broken libxml2-devel
 
 yum install -yt --skip-broken cloud-utils
 yum install -yt --skip-broken wget
+yum install -yt --skip-broken screen
 yum install -yt --skip-broken byobu
 yum install -yt --skip-broken nano
 yum install -yt --skip-broken patch
