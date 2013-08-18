@@ -34,11 +34,11 @@ def main():
 	print "FSTAB", fstab
 	print "SETUP", setup
 
-	for vol in setup:
+	for vol in sorted( setup ):
 		print "checking", vol
 		checksetup( setup[vol] )
 
-	for vol in setup:
+	for vol in sorted( setup ):
 		print "ATTACHING", vol
 
 		if setup[vol] is None: 
@@ -59,7 +59,7 @@ def main():
 
 		attachvol(setup[vol])
 
-	for vol in setup:
+	for vol in sorted( setup ):
 		if setup[vol] is None: continue
 		mountvol(setup[vol], fstab)
 
