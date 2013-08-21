@@ -50,7 +50,7 @@ git pull
 
 sleep 2
 
-/bin/bash ~/ec2init/init.sh
+/bin/bash ~/ec2init/begin.sh
 #########################
 
 To create your disk:

@@ -66,5 +66,5 @@ if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	
 	service btsyncd start
 else
-	echo "SKIPPING BTSYNC. NO EC2_EXTERNAL_CONFIG_PRESENT"
+	echo "SKIPPING BTSYNC. NO $EC2_EXTERNAL_CONFIG_DST"
 fi
