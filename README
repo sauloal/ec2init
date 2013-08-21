@@ -46,7 +46,7 @@ sleep 2
 
 
 cd ec2init
-git pull
+git pull origin master
 git remote rm origin
 git remote add -m master origin https://sauloal@github.com/sauloal/ec2init.git
 git config --global user.name "Saulo Alves"
