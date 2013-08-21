@@ -75,7 +75,7 @@ for BUCKET in $BUCKETS; do
 
 	if [[ -z `grep $BUCKETPATH /etc/fstab` ]]; then
 		echo "adding $BUCKETPATH to fstab"
-		echo "s3fs#$BUCKET $BUCKETPATH fuse url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_cache=/tmp,use_rrs=1,noatime, 0 0" >> /etc/fstab
+		echo -e "\ns3fs#$BUCKET $BUCKETPATH fuse url=http://s3.amazonaws.com,uid=1001,gid=1001,allow_other,use_cache=/tmp,use_rrs=1,noatime, 0 0" >> /etc/fstab
 		echo "added $BUCKETPATH to fstab"
 	else
 		echo "$BUCKETPATH already in fstab"

@@ -24,7 +24,7 @@ ERR="init.sh.${DATESTR}.err"
 # pull updates
 ##########
 cd $BASE
-git pull
+git pull origin master
 
 sleep 5
 
