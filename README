@@ -5,6 +5,9 @@ When starting ec2 add the following user data:
 ##########################
 #!/bin/bash
 set -xeu
+
+exec 2>&1 > >(tee begin.sh.log)
+
 export DEFAULT_USER=fedora
 #export DEFAULT_USER=ec2-user
 export EXTERNAL_SYNC_FOLDER=/mnt/sync
