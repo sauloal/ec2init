@@ -40,6 +40,7 @@ yum install -yt --skip-broken git
 
 sleep 2
 
+set +xeu
 if [[ ! -d "ec2init" ]]; then
 	git clone https://sauloal@github.com/sauloal/ec2init.git
 else
@@ -58,7 +59,9 @@ git config --global user.email sauloal@gmail.com
 
 sleep 2
 
-/bin/bash ~/ec2init/begin.sh
+set -xeu
+
+source ~/ec2init/begin.sh
 
 #########################
 
