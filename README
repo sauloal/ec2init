@@ -6,7 +6,10 @@ When starting ec2 add the following user data:
 #!/bin/bash
 set -xeu
 
-exec 2>&1 > >(tee begin.sh.log)
+cd ~
+
+exec  > >(tee begin.sh.log)
+exec 2>&1
 
 export DEFAULT_USER=fedora
 #export DEFAULT_USER=ec2-user
@@ -33,11 +36,10 @@ export BTSYNC_USER=<btsync user>
 export BTSYNC_PASS=<btsync pass>
 
 yum clean all
-yum install -y git
+yum install -yt --skip-broken git
 
 sleep 2
 
-cd ~
 if [[ ! -d "ec2init" ]]; then
 	git clone https://sauloal@github.com/sauloal/ec2init.git
 else
@@ -47,16 +49,17 @@ fi
 
 sleep 2
 
-
 cd ec2init
 git pull origin master
 git remote rm origin
 git remote add -m master origin https://sauloal@github.com/sauloal/ec2init.git
 git config --global user.name "Saulo Alves"
 git config --global user.email sauloal@gmail.com
+
 sleep 2
 
 /bin/bash ~/ec2init/begin.sh
+
 #########################
 
 To create your disk:
