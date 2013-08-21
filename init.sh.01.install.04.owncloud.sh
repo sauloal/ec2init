@@ -12,7 +12,7 @@ set -xeu
 cd /etc/yum.repos.d/
 wget http://download.opensuse.org/repositories/isv:ownCloud:community/Fedora_18/isv:ownCloud:community.repo
 cd -
-yum install -y owncloud
+yum install -yt owncloud
 service httpd restart
 
 
@@ -21,9 +21,11 @@ cp -f --no-preserve=all mods/selinux.new /etc/sysconfig/selinux
 
 if [[ ! -d "$EXTERNAL_SYNC_FOLDER" ]]; then
   mkdir $EXTERNAL_SYNC_FOLDER
-  chown root:apache $EXTERNAL_SYNC_FOLDER
-  chmod 770 $EXTERNAL_SYNC_FOLDER
 fi
+
+chown root:apache $EXTERNAL_SYNC_FOLDER
+chmod 770 $EXTERNAL_SYNC_FOLDER
+
 
 #################
 # OwnCloud
@@ -39,6 +41,7 @@ if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
     chmod 0774 $OWNCLOUD_DST
   fi
   
+
   if [[ -z `grep owncloud /etc/fstab` ]]; then
     echo "adding owncloud to fstab"
     echo "$OWNCLOUD_DST   $OWNCLOUD_SRC        bind    bind    0" >> /etc/fstab
@@ -46,6 +49,7 @@ if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
     echo "owncloud already in fstab"
   fi
   
+
   if [[ -z `mount | grep "owncloud"` ]]; then
     echo "mounting owncloud"
     mount --bind $OWNCLOUD_DST $OWNCLOUD_SRC
@@ -53,7 +57,9 @@ if [[ ! -z "$EC2_EXTERNAL_CONFIG_PRESENT" ]]; then
   else
     echo "owncloud already mounted"
   fi
+
   echo "mounting owncloud to external done"
+
 else
   echo "external not present. skipping mounting owncloud to external"
 fi

@@ -33,19 +33,22 @@ if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	
 	if [[ ! -d "$EXTERNAL_SYNC_FOLDER" ]]; then
 		mkdir $EXTERNAL_SYNC_FOLDER
-		chown root:apache $EXTERNAL_SYNC_FOLDER
-		chmod 770 $EXTERNAL_SYNC_FOLDER
 	else
 		echo "EXTERNAL SYNC FOLDER $EXTERNAL_SYNC_FOLDER EXISTS"
 	fi
-	
-	
+	chown root:apache $EXTERNAL_SYNC_FOLDER
+	chmod 770 $EXTERNAL_SYNC_FOLDER
+
+
+
 	if [[ ! -f "$SYNC_JSON" ]]; then
 		echo "copying sync.json"
 		sed -e 's/<BT_USER>/'$BTSYNC_USER'/g' -e 's/<BT_PASS>/'$BTSYNC_PASS'/g' -e 's@<DATA_FOLDER>@'$BT_CONF_FOLDER'@g' mods/btsync.json  >  $SYNC_JSON
 	else
 		echo "sync.json already present"
 	fi
+
+
 	
 	#cp ~/.sync.json /home/$DEFAULT_USER/
 	#cp ~/.sync.json /etc/
@@ -54,7 +57,7 @@ if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	#chmod 440 /home/$DEFAULT_USER/.sync.json
 	#chmod 440 /etc/.sync.json
 	#chown $DEFAULT_USER:apache /home/$DEFAULT_USER/.sync.json
-	chown $DEFAULT_USER:apache $SYNC_JSON
+	chown root:apache $SYNC_JSON
 	
 	
 	systemctl --system daemon-reload
