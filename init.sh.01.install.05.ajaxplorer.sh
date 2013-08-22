@@ -12,8 +12,21 @@ else
 	echo "ajax explorer release already installed"
 fi
 
-yum update -y
-yum install -y ajaxplorer
+yum update -yt
+yum install -yt ajaxplorer
+
+#http://www.howtoforge.com/apc-php5-apache2-fedora8
+yum install -yt php-pear php-devel httpd-devel
+
+#RUN MANUALLY
+#pecl install --soft --alldeps apc
+echo "pecl install --soft --alldeps apc" >> RUNME.sh
+
+#if [[ -z `grep apc.so /etc/php.d/apc.ini` ]]; then
+	#vi /etc/php.d/apc.ini
+	
+#	echo -e "extension=apc.so\napc.enabled=1\napc.shm_size=30" >> /etc/php.d/apc.ini
+#fi
 
 cp -f --no-preserve=all mods/bootstrap_conf.php /etc/ajaxplorer/bootstrap_conf.php 
 cp -f --no-preserve=all mods/ajaxplorer.conf /etc/httpd/conf.d/ajaxplorer.conf
