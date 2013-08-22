@@ -55,7 +55,7 @@ chmod 400 ~/.boto
 
 echo "$EC2_ACCESS_KEY:$EC2_SECRET_ACCESS_KEY" > /etc/passwd-s3fs
 chmod 400 /etc/passwd-s3fs
-
+sed -e 's/^Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers
 
 
 curl "https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4" 2>/dev/null

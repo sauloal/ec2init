@@ -1,25 +1,86 @@
+action "Starting btsyncd: " sudo -b -u <EFFECTIVE_USER> bash -c '/usr/bin/btsync --config <CONFIG_FILE>'
+
 #!/bin/sh
-#
-# chkconfig: 2345 80 30
-# description: btsync
-#
-# BTsyncd This shell script takes care of starting and stopping BTsync
-# description: BTsync is an awesome synchronization tool.
+### BEGIN INIT INFO
+# Provides: btsyncd
+# Required-Start: $local_fs $remote_fs
+# Required-Stop: $local_fs $remote_fs
+# Should-Start: $network
+# Should-Stop: $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Multi-user daemonized version of btsync.
+# Description: Starts the btsync daemon for all registered users.
+### END INIT INFO
 
-# Source function library.
-. /etc/rc.d/init.d/functions
+# Replace with linux users you want to run BTSync clients for
+BTUSER="<EFFECTIVE_USER>"
+CONFIG="<CONFIG_FILE>"
+DAEMON=/usr/bin/btsync
 
-[ -f /usr/bin/btsync ] || exit 0
+#source /etc/rc.d/init.d/functions
+
+#functions
+RETVAL=0
+
+start() {
+    logger " Starting BTSync"
+    if [ -f $config ]; then
+      logger " Starting BTSync :: has config"
+      sudo -b -u $BTUSER bash -c "$DAEMON --config $CONFIG"
+      RETVAL=$?
+    else
+      logger " Starting BTSync :: does not has config. skipping"
+      RETVAL=1
+    fi
+}
+
+
+stop() {
+    logger " Stoping BTSync"
+    dbpid=`pgrep -fu $BTUSER $DAEMON`
+    if [ ! -z "$dbpid" ]; then
+      logger " Stoping BTSync :: pid $dbpid exists"
+      killall btsync
+      #daemon -o -c $BTUSER -K -u $BTUSER -x $DAEMON
+      RETVAL=$?
+    else
+      logger " Stoping BTSync :: no pid"
+      RETVAL=1
+    fi
+}
+
+status() {
+    logger " Checking BTSync"
+    dbpid=`pgrep -fu $BTUSER $DAEMON`
+    if [ -z "$dbpid" ]; then
+      logger " Checking BTSync :: Not running"
+    else
+      logger " Checking BTSync :: running"
+    fi
+}
+
 
 case "$1" in
-start)
-action "Starting btsyncd: " sudo -u <EFFECTIVE_USER> /usr/bin/btsync --config <CONFIG_FILE>
-;;
-stop)
-action "Stopping btsyncd: " killall btsync
-;;
-*)
-echo "Usage: btsyncd {start|stop}"
-exit 1
+ start)
+  start
+  ;;
+ stop)
+  stop
+  ;;
+ restart|reload|force-reload)
+  stop
+  start
+  RETVAL=$?
+  ;;
+ status)
+  status
+  RETVAL=$?
+  ;;
+ *)
+  echo "Usage: /etc/init.d/btsyncd {start|stop|reload|force-reload|restart|status}"
+  exit 1
 esac
-exit 0
+
+exit $RETVAL
+

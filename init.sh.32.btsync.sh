@@ -6,10 +6,10 @@ tar xvf btsync.tar.gz
 
 cp btsync /usr/bin/btsync
 
-if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
+if [[ -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	BT_CONF_FOLDER="$EC2_EXTERNAL_CONFIG_DST/bittorrentsync"
 	SYNC_JSON="$BT_CONF_FOLDER/.sync.json"
-	BTSYNC_D=/etc/init.d/btsyncd
+	BTSYNC_D="/etc/init.d/btsyncd"
 	
 	if [[ ! -f "$BTSYNC_D" ]]; then
 		echo "copying btsyncd"
@@ -23,11 +23,11 @@ if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	
 	if [[ ! -d "$BT_CONF_FOLDER" ]]; then
 		mkdir $BT_CONF_FOLDER
-		chown root:apache $BT_CONF_FOLDER
-	  	chmod 770 $BT_CONF_FOLDER
 	else
 		echo "BT CONF FOLDER $BT_CONF_FOLDER ALREADY PRESENT"
 	fi
+	chown apache:apache $BT_CONF_FOLDER
+	chmod 770 $BT_CONF_FOLDER
 	
 	
 	
@@ -36,7 +36,7 @@ if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	else
 		echo "EXTERNAL SYNC FOLDER $EXTERNAL_SYNC_FOLDER EXISTS"
 	fi
-	chown root:apache $EXTERNAL_SYNC_FOLDER
+	chown apache:apache $EXTERNAL_SYNC_FOLDER
 	chmod 770 $EXTERNAL_SYNC_FOLDER
 
 
@@ -57,7 +57,7 @@ if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	#chmod 440 /home/$DEFAULT_USER/.sync.json
 	#chmod 440 /etc/.sync.json
 	#chown $DEFAULT_USER:apache /home/$DEFAULT_USER/.sync.json
-	chown root:apache $SYNC_JSON
+	chown apache:apache $SYNC_JSON
 	
 	
 	systemctl --system daemon-reload

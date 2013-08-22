@@ -25,9 +25,15 @@ yum update  -yt --skip-broken
 yum install -yt --skip-broken mlocate 
 yum install -yt --skip-broken which 
 yum install -yt --skip-broken htop 
+
+rpm --nodeps --allmatches -ev audit
 yum install -yt --skip-broken audit
+
 yum install -yt --skip-broken glibc-headers
+
+rpm --nodeps --allmatches -ev make
 yum install -yt --skip-broken make
+
 yum install -yt --skip-broken binutils 
 yum install -yt --skip-broken coreutils 
 yum install -yt --skip-broken moreutils 

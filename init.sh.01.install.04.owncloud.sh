@@ -23,7 +23,7 @@ if [[ ! -d "$EXTERNAL_SYNC_FOLDER" ]]; then
   mkdir $EXTERNAL_SYNC_FOLDER
 fi
 
-chown root:apache $EXTERNAL_SYNC_FOLDER
+chown apache:apache $EXTERNAL_SYNC_FOLDER
 chmod 770 $EXTERNAL_SYNC_FOLDER
 
 
