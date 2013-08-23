@@ -30,7 +30,7 @@ chmod 770 $EXTERNAL_SYNC_FOLDER
 #################
 # OwnCloud
 #################
-if [[ ! -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
+if [[ -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
   OWNCLOUD_DST=$EC2_EXTERNAL_CONFIG_DST/owncloud
   OWNCLOUD_SRC=/var/www/html/owncloud
   echo "mounting owncloud to external"
