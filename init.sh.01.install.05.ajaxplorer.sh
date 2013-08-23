@@ -31,5 +31,9 @@ echo "pecl install --soft --alldeps apc" >> RUNME.sh
 cp -f --no-preserve=all mods/bootstrap_conf.php /etc/ajaxplorer/bootstrap_conf.php 
 cp -f --no-preserve=all mods/ajaxplorer.conf /etc/httpd/conf.d/ajaxplorer.conf
 
+sed -f mods/bootstrap_context.pgp.sed /etc/ajaxplorer/bootstrap_context.php > /tmp/b
+mv /etc/ajaxplorer/bootstrap_context.php /etc/ajaxplorer/bootstrap_context.php.bkp
+cp -f --no-preserve=all /tmp/b /etc/ajaxplorer/bootstrap_context.php
+
 /bin/systemctl restart  httpd.service
 
