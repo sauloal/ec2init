@@ -1,5 +1,0 @@
---- mods/nfs_exports.orig	2013-04-15 08:24:20.809253226 -0400
-+++ mods/nfs_exports.new	2013-04-15 09:57:16.375826431 -0400
-@@ -0,0 +1,2 @@
-+/export/external	(rw)
-+/export	(rw,fsid=0)

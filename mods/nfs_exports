@@ -1,0 +1,1 @@
+/mnt/sync *(rw,sync,insecure,all_squash,no_subtree_check,anonuid=48,anongid=48)

@@ -90,3 +90,5 @@ http://www.chesterproductions.net.nz/blogs/it/sysadmin/configuring-iscsi-targets
 
 cloud-init (pre-installed):
 http://stackoverflow.com/questions/10125311/how-to-fire-ec2-instances-and-upload-run-a-startup-script-on-each-of-them  		
+
+To mount NFS on windows, add mods/nfs.reg to register.

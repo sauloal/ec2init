@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default]
+"AnonymousUid"=dword:00000030
+"AnonymousGid"=dword:00000030
+
+
