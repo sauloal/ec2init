@@ -121,9 +121,9 @@ dos charset = CP932
 # compatibility.
 #
 
-	security = share
+	security = user
 	passdb backend = tdbsam
-
+	guest ok = yes
 
 # ----------------------- Domain Members Options ------------------------
 #

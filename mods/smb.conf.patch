@@ -7,10 +7,10 @@
 < 	workgroup = MYGROUP
 ---
 > 	workgroup = WORKGROUP
-123c124
-< 	security = user
+125c126
+< 
 ---
-> 	security = share
+> 	guest ok = yes
 254c255
 < 	load printers = yes
 ---
