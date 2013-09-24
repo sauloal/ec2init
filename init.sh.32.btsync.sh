@@ -4,7 +4,15 @@ wget -O btsync.tar.gz http://btsync.s3-website-us-east-1.amazonaws.com/btsync_i3
 
 tar xvf btsync.tar.gz
 
-cp btsync /usr/bin/btsync
+
+
+if [[ ! -f "/usr/bin/btsync" ]]; then
+	cp btsync /usr/bin/btsync
+else
+	echo btsync already present
+fi
+
+
 
 if [[ -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	BT_CONF_FOLDER="$EC2_EXTERNAL_CONFIG_DST/bittorrentsync"
