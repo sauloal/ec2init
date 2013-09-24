@@ -1,8 +1,11 @@
 echo "setting up btsync"
 
-wget -O btsync.tar.gz http://btsync.s3-website-us-east-1.amazonaws.com/btsync_i386.tar.gz
-
-tar xvf btsync.tar.gz
+if [[ ! -f "btsync.tar.gz" ]]; then
+	wget -O btsync.tar.gz http://btsync.s3-website-us-east-1.amazonaws.com/btsync_i386.tar.gz
+	tar xvf btsync.tar.gz
+else
+	echo "btsync.tar.gz already exists"
+fi
 
 
 
