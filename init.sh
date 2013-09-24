@@ -133,6 +133,8 @@ done
 
 cp -arf mods/index.html /var/www/html/
 
+chown -R apache:apache $EXTERNAL_SYNC_FOLDER
+
 yum clean all
 
 updatedb
