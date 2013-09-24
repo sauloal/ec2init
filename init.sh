@@ -61,8 +61,6 @@ sed -e 's/^Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers
 curl "https://$DYN_LOGIN:$DYN_PASS@www.dnsdynamic.org/api/?hostname=$DYN_HOST&myip=$EC2_PUB_IPV4" 2>/dev/null
 
 
-cp -arf mods/index.html /var/www/html/
-
 if [[ ! -f "/root/ec2init/init.attach.sh.skip" ]]; then
 	echo "disks not attached yet. attaching"
 	source ~/ec2init/init.attach.sh
@@ -132,6 +130,8 @@ for file in $BASE/init.sh.*.sh; do
 		echo "$file already run. skipping"
 	fi
 done
+
+cp -arf mods/index.html /var/www/html/
 
 yum clean all
 
