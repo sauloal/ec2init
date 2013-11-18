@@ -73,7 +73,7 @@ if [[ -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	
 	systemctl --system daemon-reload
 	chkconfig --add btsyncd
-	chkconfig --levels 2345 btsyncd on
+	chkconfig --levels 2345 btsyncd off
 	
 	service btsyncd start
 else
