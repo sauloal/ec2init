@@ -75,7 +75,7 @@ if [[ -d "$EC2_EXTERNAL_CONFIG_DST" ]]; then
 	chkconfig --add btsyncd
 	chkconfig --levels 2345 btsyncd off
 	
-	service btsyncd start
+	#service btsyncd start
 else
 	echo "SKIPPING BTSYNC. NO $EC2_EXTERNAL_CONFIG_DST"
 fi

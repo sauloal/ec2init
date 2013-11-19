@@ -1,5 +1,3 @@
-action "Starting btsyncd: " sudo -b -u <EFFECTIVE_USER> bash -c '/usr/bin/btsync --config <CONFIG_FILE>'
-
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides: btsyncd
@@ -7,7 +5,7 @@ action "Starting btsyncd: " sudo -b -u <EFFECTIVE_USER> bash -c '/usr/bin/btsync
 # Required-Stop: $local_fs $remote_fs
 # Should-Start: $network
 # Should-Stop: $network
-# Default-Start: 2 3 4 5
+# Default-Start:
 # Default-Stop: 0 1 6
 # Short-Description: Multi-user daemonized version of btsync.
 # Description: Starts the btsync daemon for all registered users.
